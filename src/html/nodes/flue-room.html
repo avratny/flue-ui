@@ -1,0 +1,25 @@
+<script type="text/javascript">
+    RED.nodes.registerType('flue-room', {
+        category: 'config',
+        defaults: {
+            name: {value: "MyRoom", required: true},
+            floor: {value: "", type: "flue-floor"},
+        },
+        label: function () {
+            const theFloor = RED.nodes.node(this.floor)
+            const theBuilding = RED.nodes.node(theFloor.building)
+            return theBuilding.name + ' > ' + theFloor.name + ' > ' + this.name
+        }
+    })
+</script>
+
+<script type="text/html" data-template-name="flue-room">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="icon-bookmark"></i> Name</label>
+        <input type="text" id="node-config-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-floor"><i class="fa fa-list-ol"></i> Floor</label>
+        <input type="text" id="node-config-input-floor">
+    </div>
+</script>

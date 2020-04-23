@@ -1,0 +1,32 @@
+$lineheight: 49px;
+
+.line{
+    @apply flex items-center m-2 shadow-xl bg-gray-700 rounded;
+    height: $lineheight + 6;
+}
+
+.line-name{
+    @apply text-2xl flex-grow;
+    height: $lineheight;
+    line-height: $lineheight;
+}
+
+.line-buttons{
+    @apply mt-2 mr-2 flex-shrink-0;
+    height: $lineheight;
+}
+
+.line-badges{
+    @apply mr-2 flex-shrink-0;
+   // height: $lineheight;
+}
+
+
+
+.line-icon{
+    @apply text-4xl pl-2 flex-auto;
+    height: $lineheight;
+    line-height: $lineheight;
+    max-width: 55px;
+    margin-right: 10px;
+}

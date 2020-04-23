@@ -1,0 +1,18 @@
+<script type="text/javascript">
+    RED.nodes.registerType('flue-ui',{
+        category: 'config',
+        defaults: {
+            url: {value:"/flue",required:true},
+        },
+        label: function() {
+            return 'Flue UI on: '+this.url;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="flue-ui">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="icon-bookmark"></i> URL</label>
+        <input type="text" id="node-config-input-name" placeholder="/flue">
+    </div>
+</script>

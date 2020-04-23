@@ -1,0 +1,34 @@
+<script type="text/javascript">
+    RED.nodes.registerType('flue-building',{
+        category: 'config',
+        defaults: {
+            name: {value:"MyBuilding",required:true},
+            ui: {value:"", type:"flue-ui"},
+            latitude: {value:52.520008,required:false,validate:RED.validators.number()},
+            longitude: {value:13.404954,required:false,validate:RED.validators.number()},
+        },
+        label: function() {
+            return this.name;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="flue-building">
+    <div class="form-row">
+        <label for="node-config-input-ui"><i class="icon-bookmark"></i> UI Configuration</label>
+        <input type="text" id="node-config-input-ui">
+    </div>
+    <hr>
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="icon-bookmark"></i> Name</label>
+        <input type="text" id="node-config-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-latitude"><i class="icon-bookmark"></i> Latitude</label>
+        <input type="text" id="node-config-input-latitude">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-longitude"><i class="icon-bookmark"></i> Longitude</label>
+        <input type="text" id="node-config-input-longitude">
+    </div>
+</script>
