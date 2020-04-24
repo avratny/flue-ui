@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -116,3 +117,5 @@ dist
 
 # anderes...
 .DS_Store
+.data
+.idea
