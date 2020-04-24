@@ -55,29 +55,26 @@
         })
     })
 
+
     $.ajax({
-        url: "/flue/pages/x",
+        url: "/flue/pages/MyBuilding/NoFloor/MyRoom/",
         success: function (data) {
+            var queue = [];
+            var result = [];
             $("[data-id='pageTitle']").text(data.pageTitle)
             $("[data-id='title']").text(data.title)
-            data.components.forEach(elemente => {
-                $.when(
-
-                ).done(function () {
-
-                })
+            data.components.forEach(element => {
+                queue.push($.get("/flue/templates/"+element.type+".tpl", function(data, status) {
+                    var item = $(data)
+                    for (var key in element) {
+                        item.html(item.html().replace("##" + key.toUpperCase() + "##", element[key]))
+                    }
+                    result.push(item.html());
+                } , 'html'));
             })
-
-            $("<div>").load("/flue/templates/flue-building.tpl", function (html) {
-
-                var item = $(html)
-                for (var key in gebaeude) {
-                    item.html(item.html().replace("##" + key.toUpperCase() + "##", gebaeude[key]))
-                }
-                $("#content").append(
-                    item.html()
-                )
-            })
+            $.when.apply($, queue).done(function() {
+                $('#content').append(result.join(''));
+            });
         }
     })
 

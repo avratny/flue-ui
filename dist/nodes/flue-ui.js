@@ -37,22 +37,28 @@ module.exports = function(RED) {
         //res.sendFile(path.join(__dirname, 'ui/index.html'));
     });
 
+    RED.httpAdmin.get('/flue/pages/*/*/*/*', function(req, res) {
+        // /Gebäude/Stockwerk/Raum
+        flueJSONbuilder.generateElements(RED.nodes, req.params[0], req.params[1], req.params[2]).then(function(result) {
+            res.json(result);
+        });
+    });
+
     RED.httpAdmin.get('/flue/pages/*/*/*', function(req, res) {
         // /Gebäude/Stockwerk/Raum
-        res.json(JSON.stringify(req.params));
+        flueJSONbuilder.generateRooms(RED.nodes, req.params[0], req.params[1]).then(function(result) {
+            res.json(result);
+        });
     });
 
     RED.httpAdmin.get('/flue/pages/*/*', function(req, res) {
-        // /Gebäude/Stockwerk
-        RED.flows.each(function(a) {
-            this.log(a);
+        flueJSONbuilder.generateFloors(RED.nodes, req.params[0]).then(function(result) {
+            res.json(result);
         });
-        res.json(JSON.stringify(req.params));
     });
 
     RED.httpAdmin.get('/flue/pages/*', function(req, res) {
-        var x = flueJSONbuilder.generateBuildings(RED.nodes);
-        res.json(x);
+        res.json(flueJSONbuilder.generateBuildings(RED.nodes));
     });
 
     RED.httpAdmin.get('/flue/css/*', function(req, res) {
