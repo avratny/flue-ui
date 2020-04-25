@@ -1,8 +1,8 @@
-module.exports = function(RED) {
+module.exports = function (RED) {
     function FlueRoomNode(n) {
-        RED.nodes.createNode(this,n);
+        RED.nodes.createNode(this, n);
         this.name = n.name;
         this.floor = n.floor;
     }
-    RED.nodes.registerType("flue-room",FlueRoomNode);
+    RED.nodes.registerType("flue-room", FlueRoomNode);
 }

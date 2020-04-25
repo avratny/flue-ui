@@ -1,13 +1,13 @@
 <script type="text/javascript">
-    RED.nodes.registerType('flue-floor',{
+    RED.nodes.registerType('flue-floor', {
         category: 'config',
         defaults: {
-            name: {value:"NoFloor",required:true},
-            building: {value:"", type:"flue-building"},
+            name: { value: "NoFloor", required: true },
+            building: { value: "", type: "flue-building" },
         },
-        label: function() {
+        label: function () {
             const theBuilding = RED.nodes.node(this.building)
-            return theBuilding.name +' > '+this.name;
+            return theBuilding.name + ' > ' + this.name;
         }
     });
 </script>

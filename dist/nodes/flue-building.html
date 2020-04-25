@@ -1,13 +1,13 @@
 <script type="text/javascript">
-    RED.nodes.registerType('flue-building',{
+    RED.nodes.registerType('flue-building', {
         category: 'config',
         defaults: {
-            name: {value:"MyBuilding",required:true},
-            ui: {value:"", type:"flue-ui"},
-            latitude: {value:52.520008,required:false,validate:RED.validators.number()},
-            longitude: {value:13.404954,required:false,validate:RED.validators.number()},
+            name: { value: "MyBuilding", required: true },
+            ui: { value: "", type: "flue-ui" },
+            latitude: { value: 52.520008, required: false, validate: RED.validators.number() },
+            longitude: { value: 13.404954, required: false, validate: RED.validators.number() },
         },
-        label: function() {
+        label: function () {
             return this.name;
         }
     });

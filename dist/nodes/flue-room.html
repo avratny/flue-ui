@@ -2,8 +2,8 @@
     RED.nodes.registerType('flue-room', {
         category: 'config',
         defaults: {
-            name: {value: "MyRoom", required: true},
-            floor: {value: "", type: "flue-floor"},
+            name: { value: "MyRoom", required: true },
+            floor: { value: "", type: "flue-floor" },
         },
         label: function () {
             const theFloor = RED.nodes.node(this.floor)
