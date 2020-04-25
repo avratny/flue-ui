@@ -3,9 +3,9 @@ function nodeById(nodeObject, id) {
 }
 
 function nodeByName(nodeObject, name) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         nodeObject.eachNode(function (node) {
-            if(nodeObject.getNode(node.id) !== null && node.name == name) {
+            if (nodeObject.getNode(node.id) !== null && node.name == name) {
                 resolve(node)
             }
         });
@@ -13,10 +13,10 @@ function nodeByName(nodeObject, name) {
 }
 
 function floorsByBuilding(nodeObject, buildingId) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         var result = [];
         nodeObject.eachNode(function (node) {
-            if(nodeObject.getNode(node.id) !== null && node.type == "flue-floor" && node.building == buildingId) {
+            if (nodeObject.getNode(node.id) !== null && node.type == "flue-floor" && node.building == buildingId) {
                 result.push(node);
             }
         });
@@ -25,10 +25,10 @@ function floorsByBuilding(nodeObject, buildingId) {
 }
 
 function roomsByFloor(nodeObject, floorId) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         var result = [];
         nodeObject.eachNode(function (node) {
-            if(nodeObject.getNode(node.id) !== null && node.type == "flue-room" && node.floor == floorId) {
+            if (nodeObject.getNode(node.id) !== null && node.type == "flue-room" && node.floor == floorId) {
                 result.push(node)
             }
         });
@@ -39,9 +39,9 @@ function roomsByFloor(nodeObject, floorId) {
 function generateBuildings(nodeObject) {
     var result = [];
     nodeObject.eachNode(function (node) {
-        if(nodeObject.getNode(node.id) !== null) {
+        if (nodeObject.getNode(node.id) !== null) {
             var cNode = nodeObject.getNode(node.id);
-            if(cNode.type == "flue-building") {
+            if (cNode.type == "flue-building") {
                 result.push({
                     type: "flue-building",
                     id: cNode.id,
@@ -61,25 +61,26 @@ function generateBuildings(nodeObject) {
 }
 
 function generateFloors(nodeObject, building) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         var result = [];
-        nodeByName(nodeObject, building).then(function(buildingNode) {
+        nodeByName(nodeObject, building).then(function (buildingNode) {
             nodeObject.eachNode(function (node) {
-                if(nodeObject.getNode(node.id) !== null) {
+                if (nodeObject.getNode(node.id) !== null) {
                     var cNode = nodeObject.getNode(node.id);
-                    if(cNode.type == "flue-floor" && cNode.building == buildingNode.id) {
+                    if (cNode.type == "flue-floor" && cNode.building == buildingNode.id) {
                         result.push({
                             type: "flue-floor",
                             id: cNode.id,
                             name: cNode.name,
                             icon: 'fa fa-list-ol',
                             value: "",
-                            visibility: "hidden"
+                            visibility: "hidden",
+                            building: building
                         });
                     }
                 }
             });
-            resolve( {
+            resolve({
                 title: "Stockwerke",
                 pageTitle: "Stockwerke",
                 components: result,
@@ -90,28 +91,30 @@ function generateFloors(nodeObject, building) {
 
 function generateRooms(nodeObject, building, floor) {
     var result = [];
-    return new Promise(function(resolve, reject) {
-        nodeByName(nodeObject, building).then(function(buildingNode) {
+    return new Promise(function (resolve, reject) {
+        nodeByName(nodeObject, building).then(function (buildingNode) {
             console.info(buildingNode);
-            floorsByBuilding(nodeObject, buildingNode.id).then(function(floorNodes) {
+            floorsByBuilding(nodeObject, buildingNode.id).then(function (floorNodes) {
                 floorNodes.forEach(floorNode => {
                     nodeObject.eachNode(function (node) {
-                        if(nodeObject.getNode(node.id) !== null) {
+                        if (nodeObject.getNode(node.id) !== null) {
                             var cNode = nodeObject.getNode(node.id);
                             console.info(floorNode);
-                            if(cNode.type == "flue-room" && cNode.floor == floorNode.id && floorNode.name == floor) {
+                            if (cNode.type == "flue-room" && cNode.floor == floorNode.id && floorNode.name == floor) {
                                 result.push({
                                     type: "flue-room",
                                     id: cNode.id,
                                     name: cNode.name,
                                     icon: 'fa fa-window-maximize',
                                     value: "",
-                                    visibility: "hidden"
+                                    visibility: "hidden",
+                                    building: building,
+                                    floor: floor
                                 });
                             }
                         }
                     });
-                    resolve( {
+                    resolve({
                         title: "Räume",
                         pageTitle: "Räume",
                         components: result,
@@ -124,18 +127,18 @@ function generateRooms(nodeObject, building, floor) {
 
 function generateElements(nodeObject, building, floor, room) {
     var result = [];
-    return new Promise(function(resolve, reject) {
-        nodeByName(nodeObject, building).then(function(buildingNode) {
+    return new Promise(function (resolve, reject) {
+        nodeByName(nodeObject, building).then(function (buildingNode) {
             floorsByBuilding(nodeObject, buildingNode.id).then(floorNodes => {
                 floorNodes.forEach(floorNode => {
-                    if(floorNode.name == floor) {
+                    if (floorNode.name == floor) {
                         // Building, Floor
                         roomsByFloor(nodeObject, floorNode.id).then(roomNodes => {
                             roomNodes.forEach(roomNode => {
-                                if(roomNode.name == room) {
+                                if (roomNode.name == room) {
                                     nodeObject.eachNode(function (node) {
                                         var cNode = nodeObject.getNode(node.id);
-                                        if(cNode !== null && cNode.type.startsWith("flue-") && cNode.room == roomNode.id) {
+                                        if (cNode !== null && cNode.type.startsWith("flue-") && cNode.room == roomNode.id) {
                                             result.push({
                                                 type: cNode.type,
                                                 id: cNode.id,
@@ -145,7 +148,7 @@ function generateElements(nodeObject, building, floor, room) {
                                             });
                                         }
                                     });
-                                    resolve( {
+                                    resolve({
                                         title: "Raum: " + room,
                                         pageTitle: "Raum",
                                         components: result,
