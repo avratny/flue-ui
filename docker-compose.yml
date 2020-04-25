@@ -2,7 +2,9 @@ version: "3.7"
 
 services:
   flue:
-    image: nodered/node-red:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
       - TZ=Europe/Amsterdam
     ports:

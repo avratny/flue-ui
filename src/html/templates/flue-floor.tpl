@@ -1,5 +1,5 @@
 <flue>
-    <a href="/flue/###NAME##/">
+    <a href="/flue/###BUILDING##/##NAME##/">
         <div class="line" id="##ID##">
             <div class="line-icon"><i class="##ICON##"></i></div>
             <div class="line-name">##NAME##</div>
