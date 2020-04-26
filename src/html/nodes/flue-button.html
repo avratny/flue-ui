@@ -1,19 +1,19 @@
 <script type="text/javascript">
-    RED.nodes.registerType('flue-button',{
+    RED.nodes.registerType('flue-button', {
         category: 'Flue UI',
         color: '#92a7cf',
         defaults: {
-            name: {value:"flue button",required:true},
-            onlabel: {value: "On", required: true},
-            offlabel: {value: "Off", required: true},
-            room: {value:"", type:"flue-room"},
-            timer: {value:false},
-            scheduler: {value:false},
+            name: { value: "flue button", required: true },
+            onlabel: { value: "On", required: true },
+            offlabel: { value: "Off", required: true },
+            room: { value: "", type: "flue-room" },
+            timer: { value: false },
+            scheduler: { value: false },
         },
-        inputs:1,
-        outputs:1,
+        inputs: 1,
+        outputs: 1,
         icon: "font-awesome/fa-square",
-        label: function() {
+        label: function () {
             return this.name;
         }
     });
