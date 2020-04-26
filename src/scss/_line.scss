@@ -6,7 +6,7 @@ $lineheight: 49px;
 }
 
 .line-name{
-    @apply text-2xl flex-grow;
+    @apply text-base flex-grow;
     height: $lineheight;
     line-height: $lineheight;
 }

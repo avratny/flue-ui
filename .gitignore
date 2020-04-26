@@ -116,5 +116,5 @@ dist
 
 # anderes...
 .DS_Store
-.data
+.data/
 .idea

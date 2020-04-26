@@ -22,7 +22,9 @@ const configuration = {
                 './src/scss/**/*.scss'
             ],
             js: './src/js/web/**/*.js',
-            utils: './src/js/utils/**/*.js'
+            utils: './src/js/utils/**/*.js',
+            icons: './src/img/ico/**/*.svg'
+
         },
         dist: {
             nodes: './dist/nodes',
@@ -30,7 +32,8 @@ const configuration = {
             templates: './dist/web/templates',
             css: './dist/web/css',
             js: './dist/web/js',
-            utils:'./dist/utils'
+            utils:'./dist/utils',
+            icons: './dist/web/ico'
         }
     }
 }
@@ -48,6 +51,11 @@ function html() {
 function templates() {
     return gulp.src(configuration.paths.src.templates)
         .pipe(gulp.dest(configuration.paths.dist.templates))
+}
+
+function icons() {
+    return gulp.src(configuration.paths.src.icons)
+        .pipe(gulp.dest(configuration.paths.dist.icons))
 }
 
 function style() {
@@ -78,7 +86,7 @@ function watch() {
     browserSync.init({
         server: {
             baseDir: configuration.paths.dist.html,
-            index: "/index.html"
+            index: "/sample.html"
         },
         notify: false
     })
@@ -100,6 +108,8 @@ exports.scripts = scripts
 exports.utils = utils
 exports.templates = templates
 exports.html = html
+exports.icons = icons
 exports.watch = watch
 
-exports.default= series(nodes, utils,templates, html, style, scripts)
+
+exports.default= series(nodes, utils,templates, html, style, scripts, icons)

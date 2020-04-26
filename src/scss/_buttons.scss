@@ -8,7 +8,14 @@
         @apply font-bold py-2 px-4 rounded;
     }
     .btn-#{$color}:hover {
-        @apply bg-#{$color}-700;
+        @if $color == grey
+        {
+            @apply bg-#{$color}-800;
+        } @else
+        {
+            @apply bg-#{$color}-700;
+        }
+
     }
 }
 
@@ -33,6 +40,4 @@ button[data-value="0"] {
     @extend .btn-indigo;
 }
 
-*[data-visibility="hidden"] {
-    display: none;
-}
+
