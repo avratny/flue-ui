@@ -139,13 +139,21 @@ function generateElements(nodeObject, building, floor, room) {
                                     nodeObject.eachNode(function (node) {
                                         var cNode = nodeObject.getNode(node.id);
                                         if (cNode !== null && cNode.type.startsWith("flue-") && cNode.room == roomNode.id) {
-                                            result.push({
+                                            resultArray = {
                                                 type: cNode.type,
                                                 id: cNode.id,
                                                 name: cNode.name,
-                                                value: "",
+                                                value: (cNode.hasOwnProperty("valueText") ? cNode.valueText() : cNode.value),
+                                                rawvalue: cNode.value,
                                                 visibility: "hidden"
-                                            });
+                                            };
+                                            resultArray = {
+                                                ...cNode,
+                                                ...resultArray
+                                            };
+
+                                            console.info(resultArray);
+                                            result.push(resultArray);
                                         }
                                     });
                                     resolve({
