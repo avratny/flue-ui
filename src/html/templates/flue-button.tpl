@@ -1,5 +1,5 @@
 <flue>
-    <div class="line" id="##ID##">
+    <div class="line flue" id="##ID##">
         <div class="line-icon"><img style="height: 48px" src="images/##ICON##.svg"></div>
         <div class="line-name">##NAME##</div>
         <div class="line-buttons">

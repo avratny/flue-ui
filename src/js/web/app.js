@@ -35,6 +35,19 @@ var FLUE = {
                 });
             }
         })
+    },
+
+    onClick: function (e) {
+        $.ajax({
+            method: "POST",
+            url: "/flue",
+            data: {
+                id: $(e.target).data("id"),
+                value: $(e.target).data("value")
+            },
+            success: data => {},
+            error: err => {},
+        });
     }
 }
 
@@ -42,3 +55,4 @@ var FLUE = {
 $(document).ready(FLUE.onReady);
 $(window).on('hashchange', FLUE.onReady);
 $(window).on("load", FLUE.onLoad);
+$(document).on("click", ".flue .btn", FLUE.onClick);
