@@ -9,6 +9,7 @@ services:
       - TZ=Europe/Amsterdam
     ports:
       - "1880:1880"
+      - "4001:4001"
     volumes:
       - ./.data/node-red/data:/data
       - .:/usr/src/node-red/flue

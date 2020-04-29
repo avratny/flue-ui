@@ -13,23 +13,48 @@ module.exports = function (RED) {
         node.icon = config.icon;
 
         var room = RED.nodes.getNode(node.room);
-        var building = RED.nodes.getNode(room.building);
+        var floor = RED.nodes.getNode(room.floor);
+        var building = RED.nodes.getNode(floor.building);
+        console.info(room);
 
         node.valueText = function () {
             return (node.value == 0 ? node.offlabel : node.onlabel);
         }
 
-        // var ui = RED.nodes.getNode(building.ui);
-
-        /**
+        var ui = RED.nodes.getNode(building.ui);
+        console.info(building.ui);
         ui.addListener(node.id, function (values) {
-            //
+            console.info(values);
+            node.value = (values.value == 0) ? 1 : 0;
+            node.send({
+                msg: {
+                    payload: {
+                        value: node.value,
+                        valueText: (node.value == 0) ? node.offlabel : node.onlabel
+                    },
+                    topic: 'value'
+                }
+            })
+            ui.emit("io", {
+                "id": node.id,
+                "value": node.value,
+                "valueText": (node.value == 0) ? node.offlabel : node.onlabel
+            });
         });
-        **/
+
         node.on('input', function (msg) {
-            console.info(msg);
-            if (msg.topic == "value") {
-                node.value = msg.payload;
+            if (node.value != msg.payload.value) {
+                node.value = msg.payload.value;
+                node.send({
+                    msg: {
+                        payload: {
+                            value: node.value,
+                            valueText: (node.value == 0) ? node.offlabel : node.onlabel
+                        },
+                        topic: 'value'
+                    }
+                });
+
             }
         });
     }

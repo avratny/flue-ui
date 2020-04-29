@@ -7,37 +7,36 @@
         @apply bg-#{$color}-500 text-white;
         @apply font-bold py-2 px-4 rounded;
     }
+
     .btn-#{$color}:hover {
-        @if $color == grey
-        {
+        @if $color==grey {
             @apply bg-#{$color}-800;
-        } @else
-        {
+        }
+
+        @else {
             @apply bg-#{$color}-700;
         }
 
     }
 }
 
-.btn-on{
+.btn-on {
     @extend .btn-green;
     @apply px-8;
 }
 
-.btn-off{
+.btn-off {
     @extend .btn-red;
 }
 
-button[data-value="1"] {
+[data-value="1"] button.btn {
     @extend .btn-on
 }
 
-button[data-value="0"] {
+[data-value="0"] button.btn {
     @extend .btn-off;
 }
 
-.btn-options{
+.btn-options {
     @extend .btn-indigo;
 }
-
-

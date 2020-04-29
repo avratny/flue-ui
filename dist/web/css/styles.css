@@ -715,7 +715,7 @@ body {
   background-color: #2d3748;
 }
 
-.btn-red, .btn-off, button[data-value="0"] {
+.btn-red, .btn-off, [data-value="0"] button.btn {
   background-color: #f56565;
   color: #fff;
   font-weight: 700;
@@ -726,7 +726,7 @@ body {
   border-radius: 0.25rem;
 }
 
-.btn-red:hover, .btn-off:hover, button:hover[data-value="0"] {
+.btn-red:hover, .btn-off:hover, [data-value="0"] button.btn:hover {
   background-color: #c53030;
 }
 
@@ -760,7 +760,7 @@ body {
   background-color: #b7791f;
 }
 
-.btn-green, .btn-on, button[data-value="1"] {
+.btn-green, .btn-on, [data-value="1"] button.btn {
   background-color: #48bb78;
   color: #fff;
   font-weight: 700;
@@ -771,7 +771,7 @@ body {
   border-radius: 0.25rem;
 }
 
-.btn-green:hover, .btn-on:hover, button:hover[data-value="1"] {
+.btn-green:hover, .btn-on:hover, [data-value="1"] button.btn:hover {
   background-color: #2f855a;
 }
 
@@ -850,7 +850,7 @@ body {
   background-color: #b83280;
 }
 
-.btn-on, button[data-value="1"] {
+.btn-on, [data-value="1"] button.btn {
   padding-left: 2rem;
   padding-right: 2rem;
 }
