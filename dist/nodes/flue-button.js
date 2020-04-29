@@ -54,6 +54,11 @@ module.exports = function (RED) {
                         topic: 'value'
                     }
                 });
+                ui.emit("io", {
+                    "id": node.id,
+                    "value": node.value,
+                    "valueText": (node.value == 0) ? node.offlabel : node.onlabel
+                });
 
             }
         });
