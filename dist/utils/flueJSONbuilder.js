@@ -93,13 +93,11 @@ function generateRooms(nodeObject, building, floor) {
     var result = [];
     return new Promise(function (resolve, reject) {
         nodeByName(nodeObject, building).then(function (buildingNode) {
-            console.info(buildingNode);
             floorsByBuilding(nodeObject, buildingNode.id).then(function (floorNodes) {
                 floorNodes.forEach(floorNode => {
                     nodeObject.eachNode(function (node) {
                         if (nodeObject.getNode(node.id) !== null) {
                             var cNode = nodeObject.getNode(node.id);
-                            console.info(floorNode);
                             if (cNode.type == "flue-room" && cNode.floor == floorNode.id && floorNode.name == floor) {
                                 result.push({
                                     type: "flue-room",
@@ -151,8 +149,6 @@ function generateElements(nodeObject, building, floor, room) {
                                                 ...cNode,
                                                 ...resultArray
                                             };
-
-                                            console.info(resultArray);
                                             result.push(resultArray);
                                         }
                                     });
