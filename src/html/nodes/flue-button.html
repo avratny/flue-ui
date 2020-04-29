@@ -27,6 +27,11 @@
         <input type="text" id="node-input-name">
     </div>
     <div class="form-row">
+        <label for="node-input-room"><i class="fa fa-window-maximize"></i> Room</label>
+        <input type="text" id="node-input-room">
+    </div>
+    <hr>
+    <div class="form-row">
         <label for="node-input-onlabel"><i class="fa fa-toggle-on"></i> Label On</label>
         <input type="text" id="node-input-onlabel">
     </div>
@@ -35,12 +40,16 @@
         <input type="text" id="node-input-offlabel">
     </div>
     <div class="form-row">
-        <label for="node-input-room"><i class="fa fa-window-maximize"></i> Room</label>
-        <input type="text" id="node-input-room">
-    </div>
-    <div class="form-row">
-        <label for="node-input-icon"><i class="fa fa-window-maximize"></i> Symbol</label>
+        <label for="node-input-icon"><i class="fa fa-image"></i> Icon</label>
         <input type="text" id="node-input-icon">
+    </div>
+    <hr>
+    <div class="form-row">
+        <label for="node-input-value"><i class="fa fa-i-cursor"></i> Initial Value</label>
+        <select id="node-input-value">
+            <option value=0>0 = off</option>
+            <option value=1>1 = on</option>
+        </select>
     </div>
     <hr>
     <div class="form-row">
@@ -51,15 +60,24 @@
         <label for="node-input-scheduler"><i class="fa fa-calendar"></i> Scheduler</label>
         <input type="checkbox" id="node-input-scheduler">
     </div>
-    <div class="form-row">
-        <label for="node-input-value"><i class="fa fa-value"></i> Wert</label>
-        <select id="node-input-value">
-            <option value=0>0</option>
-            <option value=1>1</option>
-        </select>
-    </div>
+
 </script>
 
 <script type="text/html" data-help-name="flue-button">
-    <p>A simple node that converts the message payloads into all lower-case characters</p>
+    <p>Simple Button on the Flue Ui for a On/Off scenario.</p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">string</span>
+        </dt>
+        <dd>contains a json object with a least the property "value".</dd>
+        <dt class="optional">topic <span class="property-type">string</span></dt>
+        <dd> will link though.</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p><code>msg.payload.value</code> Here you can set the value of the button. <code>0 = off</code> and <code>1 = on</code></p>
+    <p><code>msg.payload.name</code> Here you can set the name of the button. It is optional.</p>
+    <p><code>msg.payload.icon</code> Here you can set the icon of the button. It is optional.</p>
 </script>
