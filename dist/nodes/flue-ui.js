@@ -29,6 +29,20 @@ module.exports = function (RED) {
         });
     });
 
+    RED.httpAdmin.get('/flue/images/*', function (req, res) {
+        var filename = path.join(__dirname, '../web/ico', req.params[0]);
+        res.setHeader('Content-Type', 'image/svg+xml');
+        res.sendFile(filename, function (err) {
+            if (err) {
+                if (node) {
+                    node.warn(filename + " not found. Maybe running in dev mode.");
+                } else {
+                    console.log("flue-ui - error:", err);
+                }
+            }
+        });
+    });
+
     RED.httpAdmin.post('/flue', function (req, res) {
         node.log(">" + req.body.id);
         node.emit(req.body.id, req.body);
