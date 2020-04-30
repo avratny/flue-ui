@@ -1,4 +1,5 @@
 var IO = io();
+var timers = [];
 
 var FLUE = {
 
@@ -34,6 +35,9 @@ var FLUE = {
                 $.when.apply($, queue).done(function () {
                     $('#content').html("");
                     $('#content').append(result.join(''));
+                    $('img[src="ico/.svg"]').each(function( i ) {
+                       $(this).attr("src", "ico/plug.svg");
+                    });
                 });
             }
         })
@@ -59,6 +63,17 @@ var FLUE = {
         if (msg.icon) $(elementName + "[data-element-type='icon']").attr("src", "images/" + msg.valueText + ".svg");
         if (msg.visiblity) $(elementName + "[data-visiblity]").attr("data-visibility", msg.visiblity);
         if (msg.enabled) $(elementName + "[data-enabled]").attr("enabled", msg.enabled);
+    },
+
+    onTimer: function () {
+
+        $(timers).each(function(i) {
+            this();
+        })
+    },
+
+    registerTimerCall(closure) {
+        timers.push(closure);
     }
 }
 
@@ -66,5 +81,6 @@ var FLUE = {
 $(document).ready(FLUE.onReady);
 $(window).on('hashchange', FLUE.onReady);
 $(window).on("load", FLUE.onLoad);
-$(document).on("click", ".flue .btn", FLUE.onClick);
+$(document).on("click", ".line.flue .button", FLUE.onClick);
 IO.on('value', FLUE.onRecv);
+setInterval(FLUE.onTimer, 900);

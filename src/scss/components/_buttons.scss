@@ -23,11 +23,11 @@
     background-color: $button-more-color;
 }
 
-button[data-value="1"] {
+[data-value="1"] [data-element-type="valueText"] {
     @extend .button-on;
 }
 
-button[data-value="0"] {
+[data-value="0"] [data-element-type="valueText"] {
     @extend .button-off;
 }
 

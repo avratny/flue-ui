@@ -11,6 +11,7 @@ module.exports = function (RED) {
         node.scheduler = config.scheduler;
         node.value = config.value;
         node.icon = config.icon;
+        node.moreButtonVisibility = (node.timer || node.scheduler);
 
         var room = RED.nodes.getNode(node.room);
         var floor = RED.nodes.getNode(room.floor);
@@ -26,13 +27,13 @@ module.exports = function (RED) {
         ui.addListener(node.id, function (values) {
             node.value = (values.value == 0) ? 1 : 0;
             node.send({
-                msg: {
+
                     payload: {
                         value: node.value,
                         valueText: (node.value == 0) ? node.offlabel : node.onlabel
                     },
                     topic: 'value'
-                }
+
             })
             ui.emit("io", {
                 "id": node.id,
@@ -45,13 +46,13 @@ module.exports = function (RED) {
             if (node.value != msg.payload.value) {
                 node.value = msg.payload.value;
                 node.send({
-                    msg: {
+
                         payload: {
                             value: node.value,
                             valueText: (node.value == 0) ? node.offlabel : node.onlabel
                         },
                         topic: 'value'
-                    }
+
                 });
                 ui.emit("io", {
                     "id": node.id,

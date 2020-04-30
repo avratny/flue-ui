@@ -34,7 +34,7 @@ module.exports = function (RED) {
         });
     });
 
-    RED.httpAdmin.get('/flue/images/*', function (req, res) {
+    RED.httpAdmin.get('/flue/ico/*', function (req, res) {
         var filename = path.join(__dirname, '../web/ico', req.params[0]);
         res.setHeader('Content-Type', 'image/svg+xml');
         res.sendFile(filename, function (err) {

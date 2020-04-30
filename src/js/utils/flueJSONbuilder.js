@@ -142,13 +142,13 @@ function generateElements(nodeObject, building, floor, room) {
                                                 id: cNode.id,
                                                 name: cNode.name,
                                                 value: (cNode.hasOwnProperty("valueText") ? cNode.valueText() : cNode.value),
-                                                rawvalue: cNode.value,
-                                                visibility: "hidden"
+                                                rawvalue: cNode.value
                                             };
                                             resultArray = {
                                                 ...cNode,
                                                 ...resultArray
                                             };
+                                            console.info(resultArray);
                                             result.push(resultArray);
                                         }
                                     });
