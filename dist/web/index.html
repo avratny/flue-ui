@@ -8,11 +8,11 @@
     <title data-id="pageTitle">Flue Starter Template</title>
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script>
         if (!document.location.href.endsWith("/")) document.location.href += "/"
     </script>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="./css/styles.css" rel="stylesheet">
@@ -47,6 +47,22 @@
     <div class="components" id="content">
     </div>
 
+    <script>
+        $("[data-type='onoff-button']").on("click", function (e) {
+            $.ajax({
+                method: "POST",
+                url: "/flue",
+                data: {
+                    id: $(e.target).data("id"),
+                    value: $(e.target).data("value") == "1" ? "0" : "1"
+                },
+                success: function (data) {
+                    $(e.target).text(data.label)
+                    $(e.target).attr('data-value', data.value)
+                }
+            })
+        })
+    </script>
     <script src="js/scripts.js"></script>
 </body>
 
