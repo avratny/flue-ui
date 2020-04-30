@@ -24,7 +24,6 @@ module.exports = function (RED) {
         var ui = RED.nodes.getNode(building.ui);
         console.info(building.ui);
         ui.addListener(node.id, function (values) {
-            console.info(values);
             node.value = (values.value == 0) ? 1 : 0;
             node.send({
                 msg: {

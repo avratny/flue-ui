@@ -48,8 +48,17 @@ var FLUE = {
     },
 
     onRecv: function (msg) {
-        $("#" + msg.id.replace(".", "\\.")).attr("data-value", msg.value);
-        if (msg.valueText) $("#" + msg.id.replace(".", "\\.") + " .btn").text(msg.valueText);
+        var elementName = "#" + msg.id.replace(".", "\\.");
+        if (msg.subElementId) {
+            elementName += " " + msg.subElementId;
+        } else {
+            elementName += " ";
+        }
+        $(elementName).attr("data-value", msg.value);
+        if (msg.valueText) $(elementName + "[data-element-type='valueText']").text(msg.valueText);
+        if (msg.icon) $(elementName + "[data-element-type='icon']").attr("src", "images/" + msg.valueText + ".svg");
+        if (msg.visiblity) $(elementName + "[data-visiblity]").attr("data-visibility", msg.visiblity);
+        if (msg.enabled) $(elementName + "[data-enabled]").attr("enabled", msg.enabled);
     }
 }
 
