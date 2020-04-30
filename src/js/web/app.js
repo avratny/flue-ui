@@ -1,7 +1,8 @@
 var IO = io();
-var timers = [];
 
 var FLUE = {
+
+    timers: [],
 
     onLoad: function () {
 
@@ -35,8 +36,8 @@ var FLUE = {
                 $.when.apply($, queue).done(function () {
                     $('#content').html("");
                     $('#content').append(result.join(''));
-                    $('img[src="ico/.svg"]').each(function( i ) {
-                       $(this).attr("src", "ico/plug.svg");
+                    $('img[src="ico/.svg"]').each(function (i) {
+                        $(this).attr("src", "ico/plug.svg");
                     });
                 });
             }
@@ -66,14 +67,23 @@ var FLUE = {
     },
 
     onTimer: function () {
-
-        $(timers).each(function(i) {
-            this();
+        $(FLUE.timers).each(function (i) {
+            this.function();
         })
     },
 
-    registerTimerCall(closure) {
-        timers.push(closure);
+    registerTimerCall(name, closure) {
+        FLUE.timers.push({
+            "name": name,
+            "function": closure
+        });
+    },
+
+    callTimer: function (name) {
+        $(FLUE.timers).each(function (i) {
+            if (this.name == name)
+                this.function();
+        })
     }
 }
 
