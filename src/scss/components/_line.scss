@@ -1,0 +1,35 @@
+.line {
+    @apply flex items-center m-2;
+    @if ($rounded-lines) {
+        @apply rounded;
+    }
+    height: $line-height + 6;
+    background-color: $line-color;
+
+}
+
+.line-name {
+    @apply text-base flex-grow truncate;
+    height: $line-height;
+    line-height: $line-height;
+}
+
+.line-buttons {
+    @apply mr-2 flex-shrink-0;
+    height: $line-height;
+}
+
+.line-badges {
+    @apply mr-2 flex-shrink-0;
+    // height: $lineheight;
+}
+
+.line-icon {
+    @apply text-4xl pl-2 flex-auto;
+    height: $line-height;
+    line-height: $line-height;
+    max-width: 55px;
+    margin-right: 10px;
+}
+
+

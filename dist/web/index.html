@@ -46,6 +46,22 @@
     <div class="components" id="content">
     </div>
 
+    <script>
+        $("[data-type='onoff-button']").on("click", function (e) {
+            $.ajax({
+                method: "POST",
+                url: "/flue",
+                data: {
+                    id: $(e.target).data("id"),
+                    value: $(e.target).data("value") == "1" ? "0" : "1"
+                },
+                success: function (data) {
+                    $(e.target).text(data.label)
+                    $(e.target).attr('data-value', data.value)
+                }
+            })
+        })
+    </script>
     <script src="js/scripts.js"></script>
 </body>
 
