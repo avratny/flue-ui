@@ -1,0 +1,36 @@
+.main-nav{
+    @apply flex items-center justify-between flex-wrap p-2;
+    background-color: $header-background-color;
+}
+
+.main-nav-logo{
+    @apply flex items-center flex-shrink-0 mr-6;
+}
+
+.main-nav-right{
+    @apply flex items-center;
+    margin-right: -8px;
+    margin-top: -8px;
+    margin-bottom: -8px;
+
+    .clock{
+        background-color: $clock-background-color;
+        height: 58px;
+        width: 70px;
+        line-height: 58px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .nav-button{
+        height: 58px;
+        line-height: 58px;
+
+        width: 70px;
+        background-color: $nav-button-background-color;
+
+        &:hover{
+            background-color: darken($nav-button-background-color,10);
+        }
+    }
+}

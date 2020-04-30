@@ -1,0 +1,31 @@
+@import "variables";
+
+$header-background-color: #5d5c61;
+$clock-background-color: #5579a4;
+
+$body-background-color: #938e94;
+$body-text-color: #232323;
+
+$footer-background-color: #5d5c61;
+
+// Nav
+$nav-button-background-color: #5579a4;
+
+// Lines
+$rounded-lines: true;
+$line-height: 50px;
+$line-color: #557A95;
+
+// Buttons
+$rounded-buttons: true;
+$button-color: #4a5568; //Standard button color
+$button-off-color: #842a24;
+$button-on-color: #7d9066;
+$button-more-color: #3a0075;
+
+// Modals
+$modal-background-color: #938e94;
+$rounded-modal: true;
+$rounded-modal-header: true;
+
+@import "styles";
