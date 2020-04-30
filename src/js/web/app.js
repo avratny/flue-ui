@@ -1,3 +1,5 @@
+var IO = io();
+
 var FLUE = {
 
     onLoad: function () {
@@ -38,16 +40,16 @@ var FLUE = {
     },
 
     onClick: function (e) {
-        $.ajax({
-            method: "POST",
-            url: "/flue",
-            data: {
-                id: $(e.target).data("id"),
-                value: $(e.target).data("value")
-            },
-            success: data => {},
-            error: err => {},
+        IO.emit("click", {
+            id: $($(e.target).closest(".flue")).attr("id"),
+            value: $($(e.target).closest(".flue")).attr("data-value")
         });
+        return false;
+    },
+
+    onRecv: function (msg) {
+        $("#" + msg.id.replace(".", "\\.")).attr("data-value", msg.value);
+        if (msg.valueText) $("#" + msg.id.replace(".", "\\.") + " .btn").text(msg.valueText);
     }
 }
 
@@ -56,3 +58,4 @@ $(document).ready(FLUE.onReady);
 $(window).on('hashchange', FLUE.onReady);
 $(window).on("load", FLUE.onLoad);
 $(document).on("click", ".flue .btn", FLUE.onClick);
+IO.on('value', FLUE.onRecv);
