@@ -7,15 +7,14 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Andreas Vratny",
-    "contributors": [
-        {
-            "name": "Benedikt Hübschen",
-            "email": "b.huebschen@vhmhv.de"
-        }
-    ],
+    "contributors": [{
+        "name": "Benedikt Hübschen",
+        "email": "b.huebschen@vhmhv.de"
+    }],
     "license": "ISC",
     "node-red": {
         "nodes": {
+            "flue-statuspanel": "dist/nodes/flue-statuspanel.js",
             "flue-button": "dist/nodes/flue-button.js",
             "flue-room": "dist/nodes/flue-room.js",
             "flue-building": "dist/nodes/flue-building.js",

@@ -1,9 +1,11 @@
 .line {
     @apply flex items-center m-2;
+
     @if ($rounded-lines) {
         @apply rounded;
     }
-    height: $line-height + 6;
+
+    height: $line-height+6;
     background-color: $line-color;
 
 }
@@ -34,4 +36,16 @@
 
 [data-visible='false'] {
     display: none;
+}
+
+[data-color='red'] {
+    @apply bg-red-800
+}
+
+[data-color='green'] {
+    @apply bg-green-800
+}
+
+[data-color='blue'] {
+    @apply bg-blue-800
 }
