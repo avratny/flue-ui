@@ -2,6 +2,7 @@ module.exports = function (RED) {
     function FlueBuildingNode(n) {
         RED.nodes.createNode(this, n);
         this.name = n.name;
+        this.order = n.order;
         this.longitude = n.longitude;
         this.latitude = n.latitude;
         this.ui = n.ui;

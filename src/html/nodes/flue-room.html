@@ -4,6 +4,7 @@
         defaults: {
             name: { value: "MyRoom", required: true },
             floor: { value: "", type: "flue-floor" },
+            order: { value: "0" },
         },
         label: function () {
             const theFloor = RED.nodes.node(this.floor)
@@ -21,5 +22,9 @@
     <div class="form-row">
         <label for="node-config-input-floor"><i class="fa fa-list-ol"></i> Floor</label>
         <input type="text" id="node-config-input-floor">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-order"><i class="fa fa-sort-numeric-asc"></i> Order</label>
+        <input type="number" id="node-config-input-order">
     </div>
 </script>

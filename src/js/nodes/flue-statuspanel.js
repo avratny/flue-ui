@@ -5,6 +5,7 @@ module.exports = function (RED) {
 
         node.name = config.name;
         node.room = config.room;
+        node.order = config.order;
         node.timer = config.timer;
         node.scheduler = config.scheduler;
         node.value = config.value;

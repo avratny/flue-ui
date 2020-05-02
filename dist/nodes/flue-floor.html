@@ -4,6 +4,7 @@
         defaults: {
             name: { value: "NoFloor", required: true },
             building: { value: "", type: "flue-building" },
+            order: { value: "0" },
         },
         label: function () {
             const theBuilding = RED.nodes.node(this.building)
@@ -20,5 +21,9 @@
     <div class="form-row">
         <label for="node-config-input-building"><i class="fa fa-home"></i> Building</label>
         <input type="text" id="node-config-input-building">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-order"><i class="fa fa-sort-numeric-asc"></i> Order</label>
+        <input type="number" id="node-config-input-order">
     </div>
 </script>
