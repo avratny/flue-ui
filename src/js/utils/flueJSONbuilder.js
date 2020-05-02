@@ -168,7 +168,14 @@ function generateElements(nodeObject, building, floor, room) {
     });
 }
 
+function sortByOrder(a, b) {
+    if (a.order > b.order) return 1;
+    if (b.order > a.order) return -1;
+    return 0;
+}
+
 module.exports.generateBuildings = generateBuildings;
 module.exports.generateFloors = generateFloors;
 module.exports.generateRooms = generateRooms;
 module.exports.generateElements = generateElements;
+module.exports.sortByOrder = sortByOrder;
