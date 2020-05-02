@@ -18,27 +18,31 @@ var FLUE = {
             success: function (data) {
                 var queue = [];
                 var result = [];
-                $("[data-id='pageTitle']").text(data.pageTitle)
-                $("[data-id='title']").text(data.title)
-                data.components.forEach(element => {
+                $("[data-id='pageTitle']").text(data.pageTitle);
+                $("[data-id='title']").text(data.title);
+                data.components.forEach(function (element) {
                     queue.push($.get("/flue/templates/" + element.type + ".tpl", function (data,
                         status) {
-                        var item = data
+                        var item = data;
                         for (var key in element) {
                             item = item.replace(RegExp("##" + key.toUpperCase() + "##", 'g'), element[key]);
                         }
-                        result.push(item);
+                        result.push($(item).html());
                     }, 'html'));
-                })
+                });
                 $.when.apply($, queue).done(function () {
                     $('#content').html("");
                     $('#content').append(result.join(''));
                     $('img[src="ico/.svg"]').each(function (i) {
                         $(this).attr("src", "ico/plug.svg");
                     });
+                    var $content = $("#content");
+                    $content.children().sort(function (a, b) {
+                        return +a.dataset.order - +b.dataset.order;
+                    }).appendTo($content);
                 });
             }
-        })
+        });
     },
 
     onClick: function (e) {
@@ -87,7 +91,7 @@ var FLUE = {
         });
     },
 
-    registerTimerCall(name, closure) {
+    registerTimerCall: function (name, closure) {
         FLUE.timers.push({
             "name": name,
             "function": closure
@@ -98,10 +102,9 @@ var FLUE = {
         $(FLUE.timers).each(function (i) {
             if (this.name == name)
                 this.function();
-        })
+        });
     }
-}
-
+};
 
 $(document).ready(FLUE.onReady);
 $(window).on('hashchange', FLUE.onReady);

@@ -1,5 +1,5 @@
 <flue>
-    <div class="line flue" id="##ID##" data-value="##RAWVALUE##" data-type="toggle-button">
+    <div class="line flue" id="##ID##" data-value="##RAWVALUE##" data-order="##ORDER##" data-type="toggle-button">
         <div class="line-icon"><img style="height: 48px" src="ico/##ICON##.svg"></div>
         <div class="line-name">##NAME##</div>
         <div class="line-buttons">

@@ -20,6 +20,7 @@ function floorsByBuilding(nodeObject, buildingId) {
                 result.push(node);
             }
         });
+        result.sort(sortByOrder);
         resolve(result);
     });
 }
@@ -32,6 +33,7 @@ function roomsByFloor(nodeObject, floorId) {
                 result.push(node)
             }
         });
+        result.sort(sortByOrder);
         resolve(result);
     });
 }
@@ -53,6 +55,7 @@ function generateBuildings(nodeObject) {
             }
         }
     });
+    result.sort(sortByOrder);
     return {
         title: "Gebäude",
         pageTitle: "Gebäude",
@@ -80,6 +83,7 @@ function generateFloors(nodeObject, building) {
                     }
                 }
             });
+            result.sort(sortByOrder);
             resolve({
                 title: "Stockwerke",
                 pageTitle: "Stockwerke",
@@ -112,6 +116,7 @@ function generateRooms(nodeObject, building, floor) {
                             }
                         }
                     });
+                    result.sort(sortByOrder);
                     resolve({
                         title: "Räume",
                         pageTitle: "Räume",
@@ -148,10 +153,10 @@ function generateElements(nodeObject, building, floor, room) {
                                                 ...cNode,
                                                 ...resultArray
                                             };
-                                            console.info(resultArray);
                                             result.push(resultArray);
                                         }
                                     });
+                                    result.sort(sortByOrder);
                                     resolve({
                                         title: "Raum: " + room,
                                         pageTitle: "Raum",

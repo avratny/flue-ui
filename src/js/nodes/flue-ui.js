@@ -64,7 +64,6 @@ module.exports = function (RED) {
     RED.httpAdmin.get('/flue/pages/*/*/*/*', function (req, res) {
         // /Gebäude/Stockwerk/Raum
         flueJSONbuilder.generateElements(RED.nodes, req.params[0], req.params[1], req.params[2]).then(function (result) {
-            result.sort(flueJSONbuilder.sortByOrder);
             res.json(result);
         });
     });
@@ -72,21 +71,18 @@ module.exports = function (RED) {
     RED.httpAdmin.get('/flue/pages/*/*/*', function (req, res) {
         // /Gebäude/Stockwerk/Raum
         flueJSONbuilder.generateRooms(RED.nodes, req.params[0], req.params[1]).then(function (result) {
-            result.sort(flueJSONbuilder.sortByOrder);
             res.json(result);
         });
     });
 
     RED.httpAdmin.get('/flue/pages/*/*', function (req, res) {
         flueJSONbuilder.generateFloors(RED.nodes, req.params[0]).then(function (result) {
-            result.sort(flueJSONbuilder.sortByOrder);
             res.json(result);
         });
     });
 
     RED.httpAdmin.get('/flue/pages/*', function (req, res) {
         result = flueJSONbuilder.generateBuildings(RED.nodes);
-        result.sort(flueJSONbuilder.sortByOrder);
         res.json(result);
     });
 
