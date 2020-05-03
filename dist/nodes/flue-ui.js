@@ -1,8 +1,8 @@
 module.exports = function (RED) {
+    var communication = require('./communication')(RED);
     var path = require('path');
     var node;
     var flueJSONbuilder = require('../utils/flueJSONbuilder.js');
-    var io = require('socket.io')(RED.server);
     var socket;
 
     function FlueUiNode(n) {
@@ -10,10 +10,6 @@ module.exports = function (RED) {
         this.url = n.url;
         this.homepage = n.homepage;
         node = this;
-
-        node.addListener("io", function (values) {
-            io.emit("value", values);
-        });
 
         RED.httpAdmin.get(n.url + '/', function (req, res) {
             res.sendFile(path.join(__dirname, '../web/index.html'));
@@ -89,12 +85,4 @@ module.exports = function (RED) {
     }
 
     RED.nodes.registerType("flue-ui", FlueUiNode);
-
-    io.on('connection', (socket) => {
-        this.socket = socket;
-        socket.on('click', (msg) => {
-            node.emit(msg.id, msg);
-        });
-    });
-
 };

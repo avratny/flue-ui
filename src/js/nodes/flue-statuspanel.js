@@ -1,4 +1,6 @@
 module.exports = function (RED) {
+    var communication = require('./communication')(RED);
+
     function FlueStatuspanelNode(config) {
         RED.nodes.createNode(this, config);
         var node = this;
@@ -17,10 +19,9 @@ module.exports = function (RED) {
 
 
         node.on('input', function (msg) {
-            var ui = RED.nodes.getNode(RED.nodes.getNode(node.group).ui);
             if (node.value != msg.payload.value) {
                 node.value = msg.payload.value;
-                ui.emit("io", resultArray = {
+                communication.io.emit("value", resultArray = {
                     ...msg.payload,
                     ...{
                         "id": node.id,

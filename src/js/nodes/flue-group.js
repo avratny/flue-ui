@@ -3,7 +3,6 @@ module.exports = function (RED) {
         RED.nodes.createNode(this, n);
         this.name = n.name;
         this.order = n.order;
-        this.ui = n.ui;
     }
     RED.nodes.registerType("flue-group", FlueGroupNode);
 };

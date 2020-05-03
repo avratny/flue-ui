@@ -1,4 +1,6 @@
 module.exports = function (RED) {
+    var communication = require('./communication')(RED);
+
     function FlueButtonNode(config) {
         RED.nodes.createNode(this, config);
         var node = this;
@@ -20,9 +22,9 @@ module.exports = function (RED) {
         };
 
         var group = RED.nodes.getNode(node.group);
-        var ui = RED.nodes.getNode(group.ui);
 
-        ui.addListener(node.id, function (values) {
+        communication.ev.addListener(node.id, function (values) {
+            console.info(values);
             node.value = (values.value == 0) ? 1 : 0;
             node.send({
                 payload: {
@@ -31,7 +33,7 @@ module.exports = function (RED) {
                 },
                 topic: 'value'
             });
-            ui.emit("io", {
+            communication.io.emit("value", {
                 "id": node.id,
                 "value": node.value,
                 "valueText": (node.value == 0) ? node.offlabel : node.onlabel
@@ -47,9 +49,8 @@ module.exports = function (RED) {
                         valueText: (node.value == 0) ? node.offlabel : node.onlabel
                     },
                     topic: 'value'
-
                 });
-                ui.emit("io", {
+                communication.io.emit("value", {
                     "id": node.id,
                     "value": node.value,
                     "valueText": (node.value == 0) ? node.offlabel : node.onlabel

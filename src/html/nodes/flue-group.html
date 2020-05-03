@@ -3,7 +3,6 @@
         category: 'config',
         defaults: {
             name: { value: "MyGroup", required: true },
-            ui: { value: "", type: "flue-ui" },
             order: { value: "0" },
         },
         label: function () {
@@ -13,10 +12,6 @@
 </script>
 
 <script type="text/html" data-template-name="flue-group">
-    <div class="form-row">
-        <label for="node-config-input-ui"><i class="icon-bookmark"></i> UI Configuration</label>
-        <input type="text" id="node-config-input-ui">
-    </div>
     <div class="form-row">
         <label for="node-config-input-name"><i class="icon-bookmark"></i> Name</label>
         <input type="text" id="node-config-input-name">
