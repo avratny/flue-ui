@@ -3,7 +3,7 @@
         category: 'config',
         defaults: {
             url: { value: "/flue", required: true },
-            homepage: { value: "", required: true },
+            homepage: { value: "", required: true, type: "flue-page" },
         },
         label: function () {
             return 'Flue UI on: ' + this.url;
@@ -13,7 +13,11 @@
 
 <script type="text/html" data-template-name="flue-ui">
     <div class="form-row">
-        <label for="node-config-input-name"><i class="icon-bookmark"></i> URL</label>
-        <input type="text" id="node-config-input-name" placeholder="/flue">
+        <label for="node-config-input-url"><i class="icon-bookmark"></i> URL</label>
+        <input type="text" id="node-config-input-url" placeholder="/flue">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-homepage"><i class="fa fa-window-maximize"></i> Homepage</label>
+        <input type="text" id="node-config-input-homepage">
     </div>
 </script>

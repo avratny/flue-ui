@@ -14,6 +14,7 @@
     "license": "ISC",
     "node-red": {
         "nodes": {
+            "flue-page": "dist/nodes/flue-page.js",
             "flue-statuspanel": "dist/nodes/flue-statuspanel.js",
             "flue-group": "dist/nodes/flue-group.js",
             "flue-button": "dist/nodes/flue-button.js",

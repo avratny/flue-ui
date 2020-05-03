@@ -8,6 +8,7 @@ module.exports = function (RED) {
     function FlueUiNode(n) {
         RED.nodes.createNode(this, n);
         this.url = n.url;
+        this.homepage = n.homepage;
         node = this;
 
         node.addListener("io", function (values) {
