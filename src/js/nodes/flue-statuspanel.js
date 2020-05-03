@@ -4,24 +4,20 @@ module.exports = function (RED) {
         var node = this;
 
         node.name = config.name;
-        node.room = config.room;
+        node.group = config.group;
         node.order = config.order;
         node.timer = config.timer;
         node.scheduler = config.scheduler;
         node.value = config.value;
         node.icon = config.icon;
 
-        var room = RED.nodes.getNode(node.room);
-        var floor = RED.nodes.getNode(room.floor);
-        var building = RED.nodes.getNode(floor.building);
-
         node.valueText = function () {
             return node.value;
-        }
+        };
 
-        var ui = RED.nodes.getNode(building.ui);
 
         node.on('input', function (msg) {
+            var ui = RED.nodes.getNode(RED.nodes.getNode(node.group).ui);
             if (node.value != msg.payload.value) {
                 node.value = msg.payload.value;
                 ui.emit("io", resultArray = {
@@ -37,4 +33,4 @@ module.exports = function (RED) {
         });
     }
     RED.nodes.registerType("flue-statuspanel", FlueStatuspanelNode);
-}
+};

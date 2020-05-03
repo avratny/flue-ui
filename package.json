@@ -15,10 +15,8 @@
     "node-red": {
         "nodes": {
             "flue-statuspanel": "dist/nodes/flue-statuspanel.js",
+            "flue-group": "dist/nodes/flue-group.js",
             "flue-button": "dist/nodes/flue-button.js",
-            "flue-room": "dist/nodes/flue-room.js",
-            "flue-building": "dist/nodes/flue-building.js",
-            "flue-floor": "dist/nodes/flue-floor.js",
             "flue-ui": "dist/nodes/flue-ui.js"
         }
     },

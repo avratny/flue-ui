@@ -1,9 +1,9 @@
 module.exports = function (RED) {
-    function FlueFloorNode(n) {
+    function FlueGroupNode(n) {
         RED.nodes.createNode(this, n);
         this.name = n.name;
         this.order = n.order;
-        this.building = n.building;
+        this.ui = n.ui;
     }
-    RED.nodes.registerType("flue-floor", FlueFloorNode);
-}
+    RED.nodes.registerType("flue-group", FlueGroupNode);
+};
