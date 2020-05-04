@@ -121,6 +121,9 @@ $(window).on('hashchange', FLUE.onReady);
 $(window).on("load", FLUE.onLoad);
 $(document).on("click", ".line.flue .button", FLUE.onClick);
 $(document).on("click", '[data-target="modal"]', function (e) {
+    $(".modal-header").html("").append($(e.currentTarget).closest(".line").clone());
+    $(".modal-header .line").css("width", "100%").css("margin", "0");
+    $(".modal-header .line .button-more").hide();
     FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(".modal-body"));
 });
 $(document).on("click", '[data-target!="modal"]', function (e) {
