@@ -2,6 +2,7 @@
     @if ($rounded-buttons) {
         @apply rounded;
     }
+
     height: $line-height - 4;
     min-width: 1.3*$line-height;
     background-color: $button-color;
@@ -31,6 +32,7 @@
     @extend .button-off;
 }
 
-
-
-
+[data-element-type="up"],
+[data-element-type="down"] {
+    @extend .button-more;
+}

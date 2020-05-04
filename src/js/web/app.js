@@ -12,7 +12,14 @@ var FLUE = {
         FLUE.navigateTo(document.location.hash.substring(1));
     },
 
-    navigateTo: function (uri) {
+    navigateTo: function (uri, target = null) {
+        if (target == null) {
+            target = $('#content');
+        }
+        if (!target.hasClass("modal-body") && target.hasClass("hidden")) {
+            FLUE.navigateTo(uri, $(".modal"));
+            return;
+        }
         $.ajax({
             url: "/flue/pages/" + uri,
             success: function (data) {
@@ -31,15 +38,18 @@ var FLUE = {
                     }, 'html'));
                 });
                 $.when.apply($, queue).done(function () {
-                    $('#content').html("");
-                    $('#content').append(result.join(''));
+                    target.html("");
+                    target.append(result.join(''));
                     $('img[src="ico/.svg"]').each(function (i) {
                         $(this).attr("src", "ico/plug.svg");
                     });
-                    var $content = $("#content");
+                    var $content = target;
                     $content.children().sort(function (a, b) {
                         return +a.dataset.order - +b.dataset.order;
-                    }).appendTo($content);
+                    }).appendTo(target);
+                    if (target.hasClass("modal-body")) {
+                        $('.modal').removeClass('hidden');
+                    }
                 });
             }
         });
@@ -110,5 +120,11 @@ $(document).ready(FLUE.onReady);
 $(window).on('hashchange', FLUE.onReady);
 $(window).on("load", FLUE.onLoad);
 $(document).on("click", ".line.flue .button", FLUE.onClick);
+$(document).on("click", '[data-target="modal"]', function (e) {
+    FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(".modal-body"));
+});
+$(document).on("click", '[data-target!="modal"]', function (e) {
+    FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(e.currentTarget).attr("data-target"));
+});
 IO.on('value', FLUE.onRecv);
 setInterval(FLUE.onTimer, 900);

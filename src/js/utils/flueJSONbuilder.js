@@ -28,6 +28,9 @@ function generateElements(nodeObject, group) {
                         value: (cNode.hasOwnProperty("valueText") ? cNode.valueText() : cNode.value),
                         rawvalue: cNode.value
                     };
+                    if (cNode.hasOwnProperty("moreoptionsgroup")) {
+                        resultArray.moreoptionsgroup = nodeObject.getNode(cNode.moreoptionsgroup).name + "/";
+                    }
                     resultArray = {
                         ...cNode,
                         ...resultArray
