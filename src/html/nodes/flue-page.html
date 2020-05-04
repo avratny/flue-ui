@@ -7,27 +7,92 @@
             g2: { value: "", type: "flue-group" },
             g3: { value: "", type: "flue-group" },
             g4: { value: "", type: "flue-group" },
+            layout: { value: "1" },
         },
         label: function () {
             return this.name
+        },
+        oneditprepare: function () {
+            $("#node-input-size").elementSizer({
+                width: "#node-input-width",
+                height: "#node-input-height",
+                group: "#node-input-group"
+            });
+
+            $(".flui-page-layout-" + (this.layout || '1')).addClass('selected');
+            [".flui-page-layout-1", ".flui-page-layout-11", ".flui-page-layout-12",
+                ".flui-page-layout-22"].forEach(function (id) {
+                    $(id).click(function (e) {
+                        $(".flui-page-layout").removeClass('selected');
+                        $(this).addClass('selected');
+                        $('#node-config-input-layout').val(id.substring(".flui-page-layout-".length));
+                        e.preventDefault();
+                        if ($('#node-config-input-layout').val() == 1) {
+                            $(".flui-page-layout-11-row").hide();
+                            $(".flui-page-layout-12-row").hide();
+                            $(".flui-page-layout-22-row").hide();
+                        } else if ($('#node-config-input-layout').val() == 11) {
+                            $(".flui-page-layout-11-row").show();
+                            $(".flui-page-layout-12-row").hide();
+                            $(".flui-page-layout-22-row").hide();
+                        } else if ($('#node-config-input-layout').val() == 12) {
+                            $(".flui-page-layout-11-row").show();
+                            $(".flui-page-layout-12-row").show();
+                            $(".flui-page-layout-22-row").hide();
+                        } else if ($('#node-config-input-layout').val() == 22) {
+                            $(".flui-page-layout-11-row").show();
+                            $(".flui-page-layout-12-row").show();
+                            $(".flui-page-layout-22-row").show();
+                        }
+                    })
+                })
+            $(".flui-page-layout-" + (this.layout || '1')).click();
+
         }
     })
 </script>
 
 <script type="text/html" data-template-name="flue-page">
-    <div class="form-row">
+        <div class="form-row">
+        <label style="vertical-align: top"><i class="fa fa-th-large"></i> Layout</label>
+        <div style="display:inline-block">
+        <input type="hidden" id="node-config-input-layout"><input type="hidden">
+        <div>
+            <a href="#" class="flui-page-layout flui-page-layout-row flui-page-layout-1">
+                <table border="1" style="width:100%; height:100%; text-align:center"><tr><td>1</td></tr></table>
+                <div class="flui-page-layout-checkbox"></div>
+
+            </a>
+            <a href="#" class="flui-page-layout flui-page-layout-row flui-page-layout-11">
+                <table border="1" style="width:100%; height:100%; text-align:center"><tr><td>1</td><td>2</td></tr></table>
+                <div class="flui-page-layout-checkbox"></div>
+            </a>
+        </div>
+        <div>
+            <a href="#" class="flui-page-layout flui-page-layout-row flui-page-layout-12">
+                <table border="1" style="width:100%; height:100%; text-align:center"><tr><td rowspan=2>1</td><td>2</td><tr><td>3</td></tr></table>
+                <div class="flui-page-layout-checkbox"></div>
+            </a>
+            <a href="#" class="flui-page-layout flui-page-layout-col flui-page-layout-22">
+                <table border="1" style="width:100%; height:100%; text-align:center"><tr><td>1</td><td>3</td><tr><td>2</td><td>4</td></tr></table>
+                <div class="flui-page-layout-checkbox"></div>
+            </a>
+        </div>
+        </div>
+    </div>
+    <div class="form-row flui-page-layout-1-row">
         <label for="node-config-input-g1"><i class="fa fa-window-maximize"></i> Group1</label>
         <input type="text" id="node-config-input-g1">
     </div>
-    <div class="form-row">
+    <div class="form-row flui-page-layout-11-row">
         <label for="node-config-input-g2"><i class="fa fa-window-maximize"></i> Group2</label>
         <input type="text" id="node-config-input-g2">
     </div>
-    <div class="form-row">
+    <div class="form-row flui-page-layout-12-row">
         <label for="node-config-input-g3"><i class="fa fa-window-maximize"></i> Group3</label>
         <input type="text" id="node-config-input-g3">
     </div>
-    <div class="form-row">
+    <div class="form-row flui-page-layout-22-row">
         <label for="node-config-input-g4"><i class="fa fa-window-maximize"></i> Group4</label>
         <input type="text" id="node-config-input-g4">
     </div>
@@ -40,3 +105,50 @@
         <input type="number" id="node-config-input-order">
     </div>
 </script>
+<style>
+    .flui-page-layout {
+        position: relative;
+        display: inline-block;
+        width: 90px;
+        height: 60px;
+        border-radius: 3px;
+        border: 1px solid #bbb;
+        cursor: pointer;
+        color: #666;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .flui-page-layout.selected,
+    .flui-page-layout:hover {
+        border-color: #333;
+        color: #333;
+    }
+
+    .flui-page-layout span {
+        position: absolute;
+    }
+
+    .flui-page-layout-value {
+        font-weight: bold;
+    }
+
+    .flui-page-layout-checkbox {
+        display: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        border: 1px solid #bbb;
+        position: absolute;
+        right: -5px;
+        top: -5px;
+        background: #fff;
+    }
+
+    .flui-page-layout.selected .flui-page-layout-checkbox {
+        display: inline-block;
+        box-shadow: inset 0px 0px 0px 2px #fff;
+        background: #333;
+        border-color: #333;
+    }
+</style>
