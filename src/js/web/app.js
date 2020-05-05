@@ -10,6 +10,24 @@ var FLUE = {
 
     onReady: function () {
         FLUE.navigateTo(document.location.hash.substring(1));
+        $(document).on("click", ".line.flue .button", FLUE.onClick);
+        $(document).on("click", '[data-target]', function (e) {
+            if ($(e.currentTarget).attr("data-target") == "modal") {
+                $(".modal-header").html("").append($(e.currentTarget).closest(".line").clone());
+                $(".modal-header .line").css("width", "100%").css("margin", "0");
+                $(".modal-header .line .button-more").hide();
+                FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(".modal-body"));
+            } else {
+                FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(e.currentTarget).attr("data-target"));
+            }
+        });
+        $(document).on("click", '.modal', function (e) {
+            if ($(e.target).hasClass("modal")) {
+                $(".modal").addClass("hidden");
+            }
+        });
+        IO.on('value', FLUE.onRecv);
+        setInterval(FLUE.onTimer, 900);
     },
 
     navigateTo: function (uri, target = null) {
@@ -119,15 +137,3 @@ var FLUE = {
 $(document).ready(FLUE.onReady);
 $(window).on('hashchange', FLUE.onReady);
 $(window).on("load", FLUE.onLoad);
-$(document).on("click", ".line.flue .button", FLUE.onClick);
-$(document).on("click", '[data-target="modal"]', function (e) {
-    $(".modal-header").html("").append($(e.currentTarget).closest(".line").clone());
-    $(".modal-header .line").css("width", "100%").css("margin", "0");
-    $(".modal-header .line .button-more").hide();
-    FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(".modal-body"));
-});
-$(document).on("click", '[data-target!="modal"]', function (e) {
-    FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(e.currentTarget).attr("data-target"));
-});
-IO.on('value', FLUE.onRecv);
-setInterval(FLUE.onTimer, 900);
