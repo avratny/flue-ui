@@ -12,12 +12,24 @@
             scheduler: { value: false },
             value: { value: 0 },
             icon: { value: "" },
+            moreoptionsgroup: { value: "" },
+            hasmoreoptionsgroup: { value: false },
+            grouptarget: { value: "" }
         },
         inputs: 1,
         outputs: 1,
         icon: "font-awesome/fa-square",
         label: function () {
             return this.name;
+        },
+        oneditprepare: function () {
+            $("#node-input-hasmoreoptionsgroup").on("click", function () {
+                if ($("#node-input-hasmoreoptionsgroup").prop("checked")) {
+                    $("#node-input-moreoptionsgroup").closest(".form-row").find("div").first().show();
+                } else {
+                    $("#node-input-moreoptionsgroup").closest(".form-row").find("div").first().hide();
+                }
+            });
         }
     });
 </script>
@@ -34,6 +46,14 @@
     <div class="form-row">
         <label for="node-input-order"><i class="fa fa-sort-numeric-asc"></i> Order</label>
         <input type="number" id="node-input-order">
+    </div>
+    <div class="form-row">
+        <label for="node-input-moreoptionsgroup"><i class="fa fa-window-maximize"></i> More <input type="checkbox" id="node-input-hasmoreoptionsgroup" style="width:auto;"></label>
+        <input type="text" id="node-input-moreoptionsgroup">
+    </div>
+    <div class="form-row">
+        <label for="node-input-grouptarget"><i class="fa fa-chain"></i> Target</label>
+        <input type="text" id="node-input-grouptarget">
     </div>
     <hr>
     <div class="form-row">

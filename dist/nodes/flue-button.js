@@ -14,7 +14,10 @@ module.exports = function (RED) {
         node.scheduler = config.scheduler;
         node.value = config.value;
         node.icon = config.icon;
-        node.moreButtonVisibility = (node.timer || node.scheduler);
+        node.moreoptionsgroup = config.moreoptionsgroup;
+        node.hasmoreoptionsgroup = config.hasmoreoptionsgroup;
+        node.grouptarget = config.grouptarget;
+        node.moreButtonVisibility = (node.timer || node.scheduler || node.hasmoreoptionsgroup);
 
 
         node.valueText = function () {
