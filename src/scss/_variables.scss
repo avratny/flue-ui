@@ -1,3 +1,18 @@
+$debug : false;
+
+$colors :(
+    "primary": #667eea,
+    "background": #4a5568,
+    "text": #ffffff,
+    "borders": #373f4e,
+
+    "red":#e53e3e,
+    "green": #64ad6c,
+    "blue": #579fd1,
+    "yellow": #c7bd4d,
+);
+
+
 //Header Body Footer
 $header-background-color: #667eea;
 $clock-background-color: #4a5568;
@@ -9,6 +24,9 @@ $footer-background-color: #667eea;
 
 // Nav
 $nav-button-background-color: #536fd6;
+
+// Page
+$page-border-color: #373f4e;
 
 // Lines
 $rounded-lines: true;
