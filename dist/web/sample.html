@@ -18,7 +18,7 @@
     <!--Replace with your tailwind.css once created-->
 </head>
 
-<body>
+<body class="debug-screens">
 
     <header>
         <nav class="main-nav">
@@ -44,17 +44,15 @@
             </div>
         </nav>
     </header>
-    <main class="flex-grow">
-        <div class="components" id="content">
-            <div class="line">
-                <div class="line-icon"><img style="height: 48px" src="ico/overhead_light.svg"></div>
-                <div class="line-name">Deckenleuchte</div>
-                <div class="line-buttons">
-                    <button class="button button-on">On</button>
-                    <button class="button button-off">Off</button>
-                    <button class="button button-more"><i class="fa fa-cog"></i></button>
-                </div>
-            </div>
+    <main class="page-1 hidden">
+        <div class="content-1">One Page</div>
+    </main>
+    <main class="page-1-1 hidden">
+        <div class="content-1">dd</div>
+        <div class="content-2" >dd</div>
+    </main>
+    <main class="page-2-2 ">
+        <div class="content-1">
             <div class="line">
                 <div class="line-icon"><img style="height: 48px" src="ico/overhead_light.svg"></div>
                 <div class="line-name">Deckenleuchte</div>
@@ -65,7 +63,22 @@
                 </div>
             </div>
         </div>
+        <div class="content-2">
+            <div class="line">
+                <div class="line-icon"><img style="height: 48px" src="ico/overhead_light.svg"></div>
+                <div class="line-name">Deckenleuchte</div>
+                <div class="line-buttons">
+                    <button class="button button-on">On</button>
+                    <button class="button button-off">Off</button>
+                    <button class="button button-more"><i class="fa fa-cog"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="content-break"></div>
+        <div class="content-3" ></div>
+        <div class="content-4" ></div>
     </main>
+
     <div class="modal hidden">
         <div class="modal-content">
             <div class="modal-header">
@@ -91,7 +104,8 @@
 
 
     <script>
-        FLUE.registerTimerCall("update_clock", function () {
+
+        function update_clock() {
             var dt_now = new Date()
             var hh = dt_now.getHours()
             var mm = dt_now.getMinutes()
@@ -103,9 +117,6 @@
                 mm = "0" + mm
             }
             $('.clock').text(hh + ":" + mm)
-        });
-
-        function update_clock() {
         }
 
         update_clock()
