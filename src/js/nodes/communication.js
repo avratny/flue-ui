@@ -19,7 +19,29 @@ module.exports = function (RED) {
     return {
         io: io,
         ev: ev,
-        addListener: ev.addListener
+        addListener: ev.addListener,
+        prepareNodePacket: function (node) {
+            result = [];
+            var resultArray = {
+                type: node.type,
+                id: node.id,
+                name: node.name,
+                value: node.value
+            };
+            if (node.hasOwnProperty("valueText")) {
+                resultArray.valueText = node.valueText();
+            }
+            if (node.hasOwnProperty("moreoptionsgroup")) {
+                var theNode = RED.nodes.getNode(node.moreoptionsgroup);
+                if (theNode) resultArray.moreoptionsgroup = theNode.name + "/";
+            }
+            resultArray = {
+                ...node,
+                ...resultArray
+            };
+            result.push(resultArray);
+            return result[0];
+        }
     };
 };
 

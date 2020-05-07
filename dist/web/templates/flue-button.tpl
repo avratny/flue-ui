@@ -10,11 +10,12 @@
     </div>
     <script>
         $(document).on("flue:input", "$flueNode", function(event, obj) {
-            if(obj.valueText) $(this).find("button#btnWithValue").text(obj.valueText);
-            if(obj.icon) $(this).find(".line-icon img").attr("src", "ico/"+obj.icon+".svg");
-            if(obj.name) $(this).find(".line-name").text(obj.name);
-            if(obj.rawvalue) $(this).attr("data-value", obj.rawvalue);
-            if(obj.value) $(this).attr("data-value", obj.value);
+            debugger;
+            if(obj.hasOwnProperty('valueText')) $(this).find("button#btnWithValue").text(obj.valueText);
+            if(obj.hasOwnProperty('icon')) $(this).find(".line-icon img").attr("src", "ico/"+obj.icon+".svg");
+            if(obj.hasOwnProperty('name')) $(this).find(".line-name").text(obj.name);
+            if(obj.hasOwnProperty('rawvalue')) $(this).attr("data-value", obj.rawvalue);
+            if(obj.hasOwnProperty('value')) $(this).attr("data-value", obj.value);
         });
 
         $(document).on("click", "$flueNode #btnWithValue", function(event) {
