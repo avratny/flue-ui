@@ -10,10 +10,10 @@ var FLUE = {
 
     onReady: function () {
         FLUE.navigateTo(document.location.hash.substring(1));
-        $(document).on("click", ".line.flue .button", FLUE.onClick);
         $(document).on("click", '[data-target]', function (e) {
+            e.stopPropagation();
             if ($(e.currentTarget).attr("data-target") == "modal") {
-                $(".modal-header").html("").append($(e.currentTarget).closest(".line").clone());
+                $(".modal-header").empty().append($(e.currentTarget).closest(".line").clone());
                 $(".modal-header .line").css("width", "100%").css("margin", "0");
                 $(".modal-header .line .button-more").hide();
                 FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(".modal-body"));
@@ -26,6 +26,7 @@ var FLUE = {
                 $(".modal").addClass("hidden");
             }
         });
+        $(document).on("click", ".line.flue .button:not(button-more)", FLUE.onClick);
         IO.on('value', FLUE.onRecv);
         setInterval(FLUE.onTimer, 900);
     },
@@ -48,16 +49,13 @@ var FLUE = {
                 data.components.forEach(function (element) {
                     queue.push($.get("/flue/templates/" + element.type + ".tpl", function (data,
                         status) {
-                        var item = data;
-                        for (var key in element) {
-                            item = item.replace(RegExp("##" + key.toUpperCase() + "##", 'g'), element[key]);
-                        }
-                        result.push($(item).html());
+                        data = data.replace(new RegExp("\\$flueNode", 'gi'), "#" + element.id.replace(".", "\\\\.") + "");
+                        data = data.replace(new RegExp("\\##ID##", 'gi'), element.id);
+                        result.push($(data).html());
                     }, 'html'));
                 });
                 $.when.apply($, queue).done(function () {
-                    target.html("");
-                    target.append(result.join(''));
+                    target.empty().append(result.join(''));
                     $('img[src="ico/.svg"]').each(function (i) {
                         $(this).attr("src", "ico/plug.svg");
                     });
@@ -68,6 +66,9 @@ var FLUE = {
                     if (target.hasClass("modal-body")) {
                         $('.modal').removeClass('hidden');
                     }
+                    data.components.forEach(function (element) {
+                        FLUE.onRecv(element);
+                    });
                 });
             }
         });
@@ -82,35 +83,13 @@ var FLUE = {
     },
 
     onRecv: function (msg) {
-        var elementName = "#" + msg.id.replace(".", "\\.");
+        var elementName = "#" + msg.id;
+        elementName = elementName.replace(".", "\\.");
         if (msg.subElementId) {
             elementName += " " + msg.subElementId;
         }
+        $(elementName).trigger("flue:input", [msg]);
         var keys = Object.keys(msg);
-        for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
-            if (key != "icon" && key != "valueText") {
-                if ($(elementName + "[data-" + key + "]").length > 0) {
-                    $(elementName + "[data-" + key + "]").attr("data-" + key, msg[key]);
-                } else if ($(elementName + " [data-" + key + "]").length > 0) {
-                    $(elementName + " [data-" + key + "]").attr("data-" + key, msg[key]);
-                }
-            } else {
-                if (key == "icon") {
-                    if ($(elementName + "[data-element-type='icon']").length > 0) {
-                        $(elementName + "[data-element-type='icon']").attr("src", "images/" + msg[key] + ".svg");
-                    } else if ($(elementName + " [data-element-type='icon']").length > 0) {
-                        $(elementName + " [data-element-type='icon']").attr("src", "images/" + msg[key] + ".svg");
-                    }
-                } else if (key == "valueText") {
-                    if ($(elementName + "[data-element-type='valueText']").length > 0) {
-                        $(elementName + "[data-element-type='valueText']").text(msg[key]);
-                    } else if ($(elementName + " [data-element-type='valueText']").length > 0) {
-                        $(elementName + " [data-element-type='valueText']").text(msg[key]);
-                    }
-                }
-            }
-        }
     },
 
     onTimer: function () {

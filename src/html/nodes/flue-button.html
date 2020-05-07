@@ -12,8 +12,7 @@
             scheduler: { value: false },
             value: { value: 0 },
             icon: { value: "" },
-            moreoptionsgroup: { value: "" },
-            hasmoreoptionsgroup: { value: false },
+            moreoptionsgroup: { value: "", type: "flue-group", required: false },
             grouptarget: { value: "" }
         },
         inputs: 1,
@@ -23,13 +22,6 @@
             return this.name;
         },
         oneditprepare: function () {
-            $("#node-input-hasmoreoptionsgroup").on("click", function () {
-                if ($("#node-input-hasmoreoptionsgroup").prop("checked")) {
-                    $("#node-input-moreoptionsgroup").closest(".form-row").find("div").first().show();
-                } else {
-                    $("#node-input-moreoptionsgroup").closest(".form-row").find("div").first().hide();
-                }
-            });
         }
     });
 </script>
@@ -48,8 +40,9 @@
         <input type="number" id="node-input-order">
     </div>
     <div class="form-row">
-        <label for="node-input-moreoptionsgroup"><i class="fa fa-window-maximize"></i> More <input type="checkbox" id="node-input-hasmoreoptionsgroup" style="width:auto;"></label>
-        <input type="text" id="node-input-moreoptionsgroup">
+        <label for="node-input-moreoptionsgroup"><i class="fa fa-window-maximize"></i> More options</label>
+        <select id="node-input-moreoptionsgroup">
+        </select>
     </div>
     <div class="form-row">
         <label for="node-input-grouptarget"><i class="fa fa-chain"></i> Target</label>
