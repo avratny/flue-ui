@@ -10,12 +10,14 @@
     </div>
     <script>
         $(document).on("flue:input", "$flueNode", function(event, obj) {
-            debugger;
-            if(obj.hasOwnProperty('valueText')) $(this).find("button#btnWithValue").text(obj.valueText);
-            if(obj.hasOwnProperty('icon')) $(this).find(".line-icon img").attr("src", "ico/"+obj.icon+".svg");
-            if(obj.hasOwnProperty('name')) $(this).find(".line-name").text(obj.name);
-            if(obj.hasOwnProperty('rawvalue')) $(this).attr("data-value", obj.rawvalue);
-            if(obj.hasOwnProperty('value')) $(this).attr("data-value", obj.value);
+            if(obj.propertyExistsAndHasValue('valueText')) $(this).find("button#btnWithValue").text(obj.valueText);
+            if(obj.propertyExistsAndHasValue('icon')) $(this).find(".line-icon img").attr("src", "ico/"+obj.icon+".svg");
+            if(obj.propertyExistsAndHasValue('name')) $(this).find(".line-name").text(obj.name);
+            if(obj.propertyExistsAndHasValue('rawvalue')) $(this).attr("data-value", obj.rawvalue);
+            if(obj.propertyExistsAndHasValue('value')) $(this).attr("data-value", obj.value);
+            if(obj.propertyExistsAndHasValue('morebuttongroup')) $(this).attr("data-value", obj.value);
+            if(obj.propertyExistsAndHasValue('grouptarget')) $(this).find("[data-target]").attr("data-value", obj.value);
+            if(obj.propertyExistsAndHasValue('value')) $(this).attr("data-value", obj.value);
         });
 
         $(document).on("click", "$flueNode #btnWithValue", function(event) {
