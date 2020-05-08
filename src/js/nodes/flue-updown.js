@@ -26,7 +26,6 @@ module.exports = function (RED) {
         var group = RED.nodes.getNode(node.group);
 
         communication.ev.addListener(node.id, function (values) {
-            console.info(values);
             node.value = (values.value == 0) ? 1 : 0;
             node.send({
                 payload: {

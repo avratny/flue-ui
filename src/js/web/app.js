@@ -12,7 +12,7 @@ var FLUE = {
         FLUE.navigateTo(document.location.hash.substring(1));
         $(document).on("click", '[data-target]', function (e) {
             e.stopPropagation();
-            if ($(e.currentTarget).attr("data-target") == "modal") {
+            if ($(e.currentTarget).attr("data-target") === "modal") {
                 $(".modal-header").empty().append($(e.currentTarget).closest(".line").clone());
                 $(".modal-header .line").css("width", "100%").css("margin", "0");
                 $(".modal-header .line .button-more").hide();
@@ -26,7 +26,6 @@ var FLUE = {
                 $(".modal").addClass("hidden");
             }
         });
-        $(document).on("click", ".line.flue .button:not(button-more)", FLUE.onClick);
         IO.on('value', FLUE.onRecv);
         setInterval(FLUE.onTimer, 900);
     },

@@ -2,6 +2,13 @@ body{
     @apply  font-sans leading-normal tracking-normal text-white flex flex-col min-h-screen ;
     background-color: $body-background-color;
     color: $body-text-color;
+
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
+
+    touch-action: manipulation;
 }
 
 footer{
@@ -19,6 +26,6 @@ footer{
     }
 }
 
-*[data-visibility="hidden"] {
+*[data-visible="false"] {
     display: none;
 }

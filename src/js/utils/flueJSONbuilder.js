@@ -1,4 +1,6 @@
 "use strict";
+var RED = require("node-red");
+var communication = require('../nodes/communication')(RED);
 
 function nodeById(nodeObject, id) {
     return nodeObject.getNode(id);
@@ -21,24 +23,8 @@ function generateElements(nodeObject, group) {
             nodeObject.eachNode(function (node) {
                 var cNode = nodeObject.getNode(node.id);
                 if (cNode !== null && cNode.type.startsWith("flue-") && cNode.group == groupNodeId.id) {
-                    var resultArray = {
-                        type: cNode.type,
-                        id: cNode.id,
-                        name: cNode.name,
-                        value: cNode.value
-                    };
-                    if (cNode.hasOwnProperty("valueText")) {
-                        resultArray.valueText = cNode.valueText();
-                    }
-                    if (cNode.hasOwnProperty("moreoptionsgroup")) {
-                        var theNode = nodeObject.getNode(cNode.moreoptionsgroup);
-                        if (theNode) resultArray.moreoptionsgroup = theNode.name + "/";
-                    }
-                    resultArray = {
-                        ...cNode,
-                        ...resultArray
-                    };
-                    result.push(resultArray);
+                    var resultPkg = communication.prepareNodePacket(cNode);
+                    result.push(resultPkg);
                 }
             });
         });
@@ -59,3 +45,4 @@ function sortByOrder(a, b) {
 
 module.exports.generateElements = generateElements;
 module.exports.sortByOrder = sortByOrder;
+

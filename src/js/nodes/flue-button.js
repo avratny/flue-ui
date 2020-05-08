@@ -10,15 +10,10 @@ module.exports = function (RED) {
         node.order = config.order;
         node.onlabel = config.onlabel;
         node.offlabel = config.offlabel;
-        node.timer = config.timer;
-        node.scheduler = config.scheduler;
         node.value = config.value;
         node.icon = config.icon;
-        node.moreoptionsgroup = config.moreoptionsgroup;
-        node.hasmoreoptionsgroup = config.hasmoreoptionsgroup;
-        node.grouptarget = config.grouptarget;
-        node.moreButtonVisibility = (node.timer || node.scheduler || node.hasmoreoptionsgroup);
-
+        node.linkgroup = config.linkgroup;
+        node.linktarget = config.linktarget;
 
         node.valueText = function () {
             return (node.value == 0 ? node.offlabel : node.onlabel);
@@ -27,7 +22,6 @@ module.exports = function (RED) {
         var group = RED.nodes.getNode(node.group);
 
         communication.ev.addListener(node.id, function (values) {
-            console.info(values);
             node.value = (values.value == 0) ? 1 : 0;
             node.send({
                 payload: {
@@ -36,7 +30,8 @@ module.exports = function (RED) {
                 },
                 topic: 'value'
             });
-            communication.io.emit("value", communication.prepareNodePacket(node));
+            var pkg = communication.prepareNodePacket(node);
+            communication.io.emit("value", pkg);
         });
 
         node.on('input', function (msg) {
