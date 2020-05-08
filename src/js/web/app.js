@@ -15,8 +15,21 @@ var FLUE = {
             success: function (data) {
                 FLUE.base = data.url;
                 $("title").text(data.title);
-                $("title").text(data.title);
-                FLUE.navigateTo(document.location.hash.substring(1));
+                $("link#theme").attr("src", "./css/" + data.css);
+                $("main").addClass("page-" + data.layout);
+                switch (data.layout) {
+                    case "2-2":
+                        FLUE.navigateTo(data.g4 + "/", $(".content-4"));
+                    case "1-2":
+                        FLUE.navigateTo(data.g3 + "/", $(".content-3"));
+                    case "1-1":
+                        FLUE.navigateTo(data.g2 + "/", $(".content-2"));
+                    case "1":
+                        FLUE.navigateTo(data.g1 + "/", $(".content-1"));
+                        break;
+                    default:
+                        break;
+                }
                 $(document).on("click", '[data-target]', function (e) {
                     e.stopPropagation();
                     if ($(e.currentTarget).attr("data-target") === "modal") {
@@ -41,8 +54,9 @@ var FLUE = {
     },
 
     navigateTo: function (uri, target = null) {
+        if ((typeof target) == "string") target = $("." + target);
         if (target == null) {
-            target = $('#content');
+            target = $('.content-1');
         }
         if (!target.hasClass("modal-body") && target.hasClass("hidden")) {
             FLUE.navigateTo(uri, $(".modal"));

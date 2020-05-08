@@ -21,7 +21,23 @@ module.exports = function (RED) {
         });
 
         RED.httpAdmin.get(n.url + '/ui', function (req, res) {
-            res.json(n);
+            var HP = RED.nodes.getNode(node.homepage);
+            var g1, g2, g3, g4;
+            console.info(HP);
+            if (HP.g1 !== "") g1 = (RED.nodes.getNode(HP.g1)).name;
+            if (HP.g2 !== "") g2 = (RED.nodes.getNode(HP.g2)).name;
+            if (HP.g3 !== "") g3 = (RED.nodes.getNode(HP.g3)).name;
+            if (HP.g4 !== "") g4 = (RED.nodes.getNode(HP.g4)).name;
+            res.json({
+                ...n,
+                ...{
+                    g1: g1,
+                    g2: g2,
+                    g3: g3,
+                    g4: g4,
+                    layout: HP.layout
+                }
+            });
         });
 
         RED.httpAdmin.get(n.url + '/templates/*', function (req, res) {

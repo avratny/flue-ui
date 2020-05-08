@@ -1,6 +1,7 @@
 module.exports = function (RED) {
     var communication = require('./communication')(RED);
     var path = require('path');
+    var fs = require("fs");
     var node;
     var flueJSONbuilder = require('../utils/flueJSONbuilder.js');
     var socket;
@@ -14,7 +15,29 @@ module.exports = function (RED) {
         node = this;
 
         RED.httpAdmin.get(n.url + '/', function (req, res) {
-            res.sendFile(path.join(__dirname, '../web/index.html'));
+            var file = fs.readFileSync(path.join(__dirname, '../web/index.html'));
+            res.setHeader('Content-Type', 'text/html');
+            res.status(200).send(file);
+        });
+
+        RED.httpAdmin.get(n.url + '/ui', function (req, res) {
+            var HP = RED.nodes.getNode(node.homepage);
+            var g1, g2, g3, g4;
+            console.info(HP);
+            if (HP.g1 !== "") g1 = (RED.nodes.getNode(HP.g1)).name;
+            if (HP.g2 !== "") g2 = (RED.nodes.getNode(HP.g2)).name;
+            if (HP.g3 !== "") g3 = (RED.nodes.getNode(HP.g3)).name;
+            if (HP.g4 !== "") g4 = (RED.nodes.getNode(HP.g4)).name;
+            res.json({
+                ...n,
+                ...{
+                    g1: g1,
+                    g2: g2,
+                    g3: g3,
+                    g4: g4,
+                    layout: HP.layout
+                }
+            });
         });
 
         RED.httpAdmin.get(n.url + '/templates/*', function (req, res) {

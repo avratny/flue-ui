@@ -20,26 +20,26 @@
             });
 
             $(".flui-page-layout-" + (this.layout || '1')).addClass('selected');
-            [".flui-page-layout-1", ".flui-page-layout-11", ".flui-page-layout-12",
-                ".flui-page-layout-22"].forEach(function (id) {
+            [".flui-page-layout-1", ".flui-page-layout-1-1", ".flui-page-layout-1-2",
+                ".flui-page-layout-2-2"].forEach(function (id) {
                     $(id).click(function (e) {
                         $(".flui-page-layout").removeClass('selected');
                         $(this).addClass('selected');
                         $('#node-config-input-layout').val(id.substring(".flui-page-layout-".length));
                         e.preventDefault();
-                        if ($('#node-config-input-layout').val() == 1) {
+                        if ($('#node-config-input-layout').val() == "1") {
                             $(".flui-page-layout-11-row").hide();
                             $(".flui-page-layout-12-row").hide();
                             $(".flui-page-layout-22-row").hide();
-                        } else if ($('#node-config-input-layout').val() == 11) {
+                        } else if ($('#node-config-input-layout').val() == "1-1") {
                             $(".flui-page-layout-11-row").show();
                             $(".flui-page-layout-12-row").hide();
                             $(".flui-page-layout-22-row").hide();
-                        } else if ($('#node-config-input-layout').val() == 12) {
+                        } else if ($('#node-config-input-layout').val() == "1-2") {
                             $(".flui-page-layout-11-row").show();
                             $(".flui-page-layout-12-row").show();
                             $(".flui-page-layout-22-row").hide();
-                        } else if ($('#node-config-input-layout').val() == 22) {
+                        } else if ($('#node-config-input-layout').val() == "2-2") {
                             $(".flui-page-layout-11-row").show();
                             $(".flui-page-layout-12-row").show();
                             $(".flui-page-layout-22-row").show();
@@ -63,17 +63,17 @@
                 <div class="flui-page-layout-checkbox"></div>
 
             </a>
-            <a href="#" class="flui-page-layout flui-page-layout-row flui-page-layout-11">
+            <a href="#" class="flui-page-layout flui-page-layout-row flui-page-layout-1-1">
                 <table border="1" style="width:100%; height:100%; text-align:center"><tr><td>1</td><td>2</td></tr></table>
                 <div class="flui-page-layout-checkbox"></div>
             </a>
         </div>
         <div>
-            <a href="#" class="flui-page-layout flui-page-layout-row flui-page-layout-12">
+            <a href="#" class="flui-page-layout flui-page-layout-row flui-page-layout-1-2">
                 <table border="1" style="width:100%; height:100%; text-align:center"><tr><td rowspan=2>1</td><td>2</td><tr><td>3</td></tr></table>
                 <div class="flui-page-layout-checkbox"></div>
             </a>
-            <a href="#" class="flui-page-layout flui-page-layout-col flui-page-layout-22">
+            <a href="#" class="flui-page-layout flui-page-layout-col flui-page-layout-2-2">
                 <table border="1" style="width:100%; height:100%; text-align:center"><tr><td>1</td><td>3</td><tr><td>2</td><td>4</td></tr></table>
                 <div class="flui-page-layout-checkbox"></div>
             </a>
