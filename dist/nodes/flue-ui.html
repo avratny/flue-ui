@@ -4,6 +4,8 @@
         defaults: {
             url: { value: "/flue", required: true },
             homepage: { value: "", required: true, type: "flue-page" },
+            title: { value: "Flue UI", required:false},
+            css: { value: "night.css", required: false}
         },
         label: function () {
             return 'Flue UI on: ' + this.url;
@@ -19,5 +21,14 @@
     <div class="form-row">
         <label for="node-config-input-homepage"><i class="fa fa-window-maximize"></i> Homepage</label>
         <input type="text" id="node-config-input-homepage">
+    </div>
+    <hr>
+    <div class="form-row">
+        <label for="node-config-input-title"><i class="fa fa-h-square"></i> Title</label>
+        <input type="text" id="node-config-input-title" placeholder="Flue UI">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-css"><i class="fa fa-eyedropper"></i> Style</label>
+        <input type="text" id="node-config-input-css" placeholder="night.css">
     </div>
 </script>

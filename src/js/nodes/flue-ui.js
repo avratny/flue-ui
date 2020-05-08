@@ -10,6 +10,8 @@ module.exports = function (RED) {
         RED.nodes.createNode(this, n);
         this.url = n.url;
         this.homepage = n.homepage;
+        this.title = n.title;
+        this.css = n.css;
         node = this;
 
         RED.httpAdmin.get(n.url + '/', function (req, res) {
