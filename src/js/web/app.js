@@ -3,31 +3,41 @@ var IO = io();
 var FLUE = {
 
     timers: [],
+    base: "",
 
     onLoad: function () {
 
     },
 
     onReady: function () {
-        FLUE.navigateTo(document.location.hash.substring(1));
-        $(document).on("click", '[data-target]', function (e) {
-            e.stopPropagation();
-            if ($(e.currentTarget).attr("data-target") === "modal") {
-                $(".modal-header").empty().append($(e.currentTarget).closest(".line").clone());
-                $(".modal-header .line").css("width", "100%").css("margin", "0");
-                $(".modal-header .line .button-more").hide();
-                FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(".modal-body"));
-            } else {
-                FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(e.currentTarget).attr("data-target"));
+        $.ajax({
+            url: "ui",
+            success: function (data) {
+                FLUE.base = data.url;
+                $("title").text(data.title);
+                $("title").text(data.title);
+                FLUE.navigateTo(document.location.hash.substring(1));
+                $(document).on("click", '[data-target]', function (e) {
+                    e.stopPropagation();
+                    if ($(e.currentTarget).attr("data-target") === "modal") {
+                        $(".modal-header").empty().append($(e.currentTarget).closest(".line").clone());
+                        $(".modal-header .line").css("width", "100%").css("margin", "0");
+                        $(".modal-header .line .button-more").hide();
+                        FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(".modal-body"));
+                    } else {
+                        FLUE.navigateTo($(e.currentTarget).attr("data-url"), $(e.currentTarget).attr("data-target"));
+                    }
+                });
+                $(document).on("click", '.modal', function (e) {
+                    if ($(e.target).hasClass("modal")) {
+                        $(".modal").addClass("hidden");
+                    }
+                });
+                IO.on('value', FLUE.onRecv);
+                setInterval(FLUE.onTimer, 900);
             }
         });
-        $(document).on("click", '.modal', function (e) {
-            if ($(e.target).hasClass("modal")) {
-                $(".modal").addClass("hidden");
-            }
-        });
-        IO.on('value', FLUE.onRecv);
-        setInterval(FLUE.onTimer, 900);
+
     },
 
     navigateTo: function (uri, target = null) {
@@ -43,6 +53,7 @@ var FLUE = {
             success: function (data) {
                 var queue = [];
                 var result = [];
+                $("title").text(data.title);
                 $("[data-id='pageTitle']").text(data.pageTitle);
                 $("[data-id='title']").text(data.title);
                 data.components.forEach(function (element) {

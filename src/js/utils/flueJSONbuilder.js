@@ -32,6 +32,7 @@ function generateElements(nodeObject, group) {
         resolve({
             title: "Gruppe: " + group,
             pageTitle: "Gruppe",
+            theme: "",
             components: result,
         });
     });
@@ -45,4 +46,3 @@ function sortByOrder(a, b) {
 
 module.exports.generateElements = generateElements;
 module.exports.sortByOrder = sortByOrder;
-
