@@ -29,11 +29,6 @@ var FLUE = {
         $(document).on("click", ".line.flue .button:not(button-more)", FLUE.onClick);
         IO.on('value', FLUE.onRecv);
         setInterval(FLUE.onTimer, 900);
-        Object.prototype.propertyExistsAndHasValue = function (propertyName) {
-            if (this.hasOwnProperty(propertyName) && this[propertyName] != "")
-                return true;
-            return false;
-        };
     },
 
     navigateTo: function (uri, target = null) {
