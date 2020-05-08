@@ -1,16 +1,48 @@
 <script type="text/javascript">
-    RED.nodes.registerType('flue-ui', {
-        category: 'config',
-        defaults: {
-            url: { value: "/flue", required: true },
-            homepage: { value: "", required: true, type: "flue-page" },
-            title: { value: "Flue UI", required:false},
-            css: { value: "night.css", required: false}
-        },
-        label: function () {
-            return 'Flue UI on: ' + this.url;
-        }
-    });
+    (function ($) {
+        RED.nodes.registerType('flue-ui', {
+            category: 'config',
+            defaults: {
+                url: { value: "/flue", required: true },
+                homepage: { value: "", required: true, type: "flue-page" },
+                title: { value: "Flue UI", required: false },
+                css: { value: "night.css", required: false }
+            },
+            hasUsers: false,
+            label: function () {
+                return 'Flue UI on: ' + this.url;
+            },
+            onpaletteadd: function () {
+                var globalUINode = null;
+                setTimeout(function () {
+                    var bases = [];
+                    RED.nodes.eachConfig(function (n) {
+                        if (n.type === 'flue-ui') { bases.push(n); }
+                    });
+
+                    if (bases.length > 0) {
+                        globalUINode = bases[0];
+                        return;
+                    } else {
+                        globalUINode = {
+                            id: RED.nodes.id(),
+                            _def: RED.nodes.getType("flue-ui"),
+                            type: "flue-ui",
+                            url: "/flue",
+                            css: "night.css",
+                            homepage: "",
+                            title: "Flue UI",
+                            users: []
+                        }
+                        RED.nodes.add(globalUINode);
+                        RED.nodes.dirty(true);
+                    }
+                }, 2000);
+            }
+        });
+    })(jQuery);
+
+
 </script>
 
 <script type="text/html" data-template-name="flue-ui">
