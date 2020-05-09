@@ -19,10 +19,13 @@ var FLUE = {
                 $("main").addClass("page-" + data.layout);
                 switch (data.layout) {
                     case "2-2":
+                        $(".content-4, .content-3, .content-2").removeClass("hidden");
                         FLUE.navigateTo(data.g4 + "/", $(".content-4"));
                     case "1-2":
+                        $(".content-3, .content-2").removeClass("hidden");
                         FLUE.navigateTo(data.g3 + "/", $(".content-3"));
                     case "1-1":
+                        $(".content-2").removeClass("hidden");
                         FLUE.navigateTo(data.g2 + "/", $(".content-2"));
                     case "1":
                         FLUE.navigateTo(data.g1 + "/", $(".content-1"));
@@ -54,12 +57,15 @@ var FLUE = {
     },
 
     navigateTo: function (uri, target = null) {
-        if ((typeof target) == "string") target = $("." + target);
+        if ((typeof target) == "string") {
+            if (target == "modal") target = "modal-body";
+            target = $("." + target);
+        }
         if (target == null) {
             target = $('.content-1');
         }
         if (!target.hasClass("modal-body") && target.hasClass("hidden")) {
-            FLUE.navigateTo(uri, $(".modal"));
+            FLUE.navigateTo(uri, $(".modal-body"));
             return;
         }
         $.ajax({
