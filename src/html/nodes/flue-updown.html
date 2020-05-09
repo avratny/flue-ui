@@ -8,6 +8,8 @@
             order: { value: "0" },
             upicon: { value: "fa-chevron-up", required: true },
             downicon: { value: "fa-chevron-down", required: true },
+            upvalue: { value: "", required: true },
+            downvalue: { value: "", required: true },
             timer: { value: false },
             scheduler: { value: false },
             value: { value: 0 },
@@ -56,6 +58,14 @@
     <div class="form-row">
         <label for="node-input-downicon"><i class="fa fa-toggle-off"></i> Icon Down</label>
         <input type="text" id="node-input-downicon">
+    </div>
+    <div class="form-row">
+        <label for="node-input-upvalue"><i class="fa fa-toggle-on"></i> Up value</label>
+        <input type="text" id="node-input-upvalue">
+    </div>
+    <div class="form-row">
+        <label for="node-input-downvalue"><i class="fa fa-toggle-off"></i> Down value</label>
+        <input type="text" id="node-input-downvalue">
     </div>
     <div class="form-row">
         <label for="node-input-icon"><i class="fa fa-image"></i> Icon</label>

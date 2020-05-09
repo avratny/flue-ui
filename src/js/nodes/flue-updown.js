@@ -34,11 +34,8 @@ module.exports = function (RED) {
                 },
                 topic: 'value'
             });
-            communication.io.emit("value", {
-                "id": node.id,
-                "value": node.value,
-                "valueText": (node.value == 0) ? node.offlabel : node.onlabel
-            });
+            var pkg = communication.prepareNodePacket(node);
+            communication.io.emit("value", pkg);
         });
 
         node.on('input', function (msg) {
@@ -51,11 +48,7 @@ module.exports = function (RED) {
                     },
                     topic: 'value'
                 });
-                communication.io.emit("value", {
-                    "id": node.id,
-                    "value": node.value,
-                    "valueText": (node.value == 0) ? node.offlabel : node.onlabel
-                });
+                communication.io.emit("value", communication.prepareNodePacket(node));
             }
         });
     }
