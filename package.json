@@ -7,12 +7,10 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Andreas Vratny",
-    "contributors": [
-        {
-            "name": "Benedikt Hübschen",
-            "email": "b.huebschen@vhmhv.de"
-        }
-    ],
+    "contributors": [{
+        "name": "Benedikt Hübschen",
+        "email": "b.huebschen@vhmhv.de"
+    }],
     "license": "ISC",
     "node-red": {
         "nodes": {
@@ -21,6 +19,7 @@
             "flue-statuspanel": "dist/nodes/flue-statuspanel.js",
             "flue-group": "dist/nodes/flue-group.js",
             "flue-button": "dist/nodes/flue-button.js",
+            "flue-webcam": "dist/nodes/flue-webcam.js",
             "flue-ui": "dist/nodes/flue-ui.js"
         }
     },

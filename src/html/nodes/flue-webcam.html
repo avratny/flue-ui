@@ -1,0 +1,73 @@
+<script type="text/javascript">
+    RED.nodes.registerType('flue-webcam', {
+        category: 'Flue UI',
+        color: '#92a7cf',
+        defaults: {
+            name: { value: "flue webcam", required: true },
+            group: { value: "", type: "flue-group" },
+            order: { value: "0" },
+            source: { value: "" },
+            sourcetype: { value: "" },
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: "font-awesome/fa-camera",
+        label: function () {
+            return this.name;
+        },
+        oneditprepare: function () {
+            $(document).on("click", '[name="node-input-sourcetype"]', function (event) {
+                $("#node-input-sourcetype").val($(event.currentTarget).val());
+            });
+
+            $('[name="node-input-sourcetype"][value="' + this.sourcetype + '"]').attr("checked", true);
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="flue-webcam">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-group"><i class="fa fa-window-maximize"></i> Group</label>
+        <input type="text" id="node-input-group">
+    </div>
+    <div class="form-row">
+        <label for="node-input-order"><i class="fa fa-sort-numeric-asc"></i> Order</label>
+        <input type="number" id="node-input-order">
+    </div>
+    <hr>
+    <div class="form-row">
+        <label for="node-input-source"><i class="fa fa-image"></i> Source</label>
+        <input type="text" id="node-input-source">
+    </div>
+    <div class="form-row">
+        <label for="node-input-sourcetype"><i class="fa fa-link"></i> Sourcetype</label>
+        <input type="hidden" id="node-input-sourcetype">
+        <div id="">
+            <input type="radio" name="node-input-sourcetype" value="mjpeg"> MJPEG
+            <input type="radio" name="node-input-sourcetype" value="single"> SINGLE
+        </div>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="flue-webcam">
+    <p>Simple Button on the Flue Ui for a On/Off scenario.</p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">string</span>
+        </dt>
+        <dd>contains a json object with a least the property "value".</dd>
+        <dt class="optional">topic <span class="property-type">string</span></dt>
+        <dd> will link though.</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p><code>msg.payload.value</code> Here you can set the value of the button. <code>0 = off</code> and <code>1 = on</code></p>
+    <p><code>msg.payload.name</code> Here you can set the name of the button. It is optional.</p>
+    <p><code>msg.payload.icon</code> Here you can set the icon of the button. It is optional.</p>
+</script>
