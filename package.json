@@ -20,6 +20,7 @@
             "flue-group": "dist/nodes/flue-group.js",
             "flue-button": "dist/nodes/flue-button.js",
             "flue-webcam": "dist/nodes/flue-webcam.js",
+            "flue-chart": "dist/nodes/flue-chart.js",
             "flue-ui": "dist/nodes/flue-ui.js"
         }
     },
