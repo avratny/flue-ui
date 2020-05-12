@@ -1,0 +1,75 @@
+<script type="text/javascript">
+    RED.nodes.registerType('flue-colorpicker', {
+        category: 'Flue UI',
+        color: '#92a7cf',
+        defaults: {
+            name: { value: "flue colorpicker", required: true },
+            group: { value: "", type: "flue-group" },
+            order: { value: "0" },
+            timer: { value: false },
+            scheduler: { value: false },
+            value: { value: "" },
+            icon: { value: "" },
+        },
+        inputs: 1,
+        outputs: 2,
+        icon: "font-awesome/fa-square",
+        label: function () {
+            return this.name;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="flue-colorpicker">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-group"><i class="fa fa-window-maximize"></i> Group</label>
+        <input type="text" id="node-input-group">
+    </div>
+    <div class="form-row">
+        <label for="node-input-order"><i class="fa fa-sort-numeric-asc"></i> Order</label>
+        <input type="number" id="node-input-order">
+    </div>
+    <hr>
+    <div class="form-row">
+        <label for="node-input-icon"><i class="fa fa-image"></i> Icon</label>
+        <input type="text" id="node-input-icon">
+    </div>
+    <hr>
+    <div class="form-row">
+        <label for="node-input-value"><i class="fa fa-i-cursor"></i> Initial Value</label>
+        <input type="text" id="node-input-value">
+    </div>
+    <hr>
+    <div class="form-row">
+        <label for="node-input-timer"><i class="fa fa-clock-o"></i> Timer</label>
+        <input type="checkbox" id="node-input-timer">
+    </div>
+    <div class="form-row">
+        <label for="node-input-scheduler"><i class="fa fa-calendar"></i> Scheduler</label>
+        <input type="checkbox" id="node-input-scheduler">
+    </div>
+
+</script>
+
+<script type="text/html" data-help-name="flue-colorpicker">
+    <p>Simple Button on the Flue Ui for a On/Off scenario.</p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">string</span>
+        </dt>
+        <dd>contains a json object with a least the property "value".</dd>
+        <dt class="optional">topic <span class="property-type">string</span></dt>
+        <dd> will link though.</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p><code>msg.payload.value</code> Here you can set the value of the button. <code>0 = off</code> and <code>1 = on</code></p>
+    <p><code>msg.payload.name</code> Here you can set the name of the button. It is optional.</p>
+    <p><code>msg.payload.icon</code> Here you can set the icon of the button. It is optional.</p>
+</script>

@@ -7,10 +7,12 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Andreas Vratny",
-    "contributors": [{
-        "name": "Benedikt Hübschen",
-        "email": "b.huebschen@vhmhv.de"
-    }],
+    "contributors": [
+        {
+            "name": "Benedikt Hübschen",
+            "email": "b.huebschen@vhmhv.de"
+        }
+    ],
     "license": "ISC",
     "node-red": {
         "nodes": {
@@ -21,6 +23,7 @@
             "flue-button": "dist/nodes/flue-button.js",
             "flue-webcam": "dist/nodes/flue-webcam.js",
             "flue-chart": "dist/nodes/flue-chart.js",
+            "flue-colorpicker": "dist/nodes/flue-colorpicker.js",
             "flue-ui": "dist/nodes/flue-ui.js"
         }
     },
@@ -34,6 +37,7 @@
         "tailwindcss-debug-screens": "^0.1.0"
     },
     "dependencies": {
+        "color-convert": "^2.0.1",
         "socket.io": "^2.3.0"
     }
 }

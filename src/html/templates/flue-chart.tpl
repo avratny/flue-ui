@@ -11,7 +11,6 @@
             Chart.defaults.global.legend.display = false;
             Chart.defaults.global.title.display = false;
             var ctx = $("$flueNode canvas")[0].getContext('2d');
-            debugger;
             var chart = new Chart(ctx, {
                 type: "line",
                 data: obj.data,
